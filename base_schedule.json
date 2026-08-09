@@ -1,0 +1,402 @@
+[
+  {
+    "date": "2026-08-09",
+    "time": "10:00 AM",
+    "region": "Mid-Atlantic",
+    "matchup": "Washington, DC 7 \u2014 Maryland 6",
+    "tv": "ESPN+",
+    "status": "FINAL"
+  },
+  {
+    "date": "2026-08-09",
+    "time": "1:00 PM",
+    "region": "Mid-Atlantic",
+    "matchup": "Pennsylvania vs Delaware",
+    "tv": "ESPN+",
+    "status": ""
+  },
+  {
+    "date": "2026-08-09",
+    "time": "4:00 PM",
+    "region": "Southwest",
+    "matchup": "Oklahoma vs Louisiana",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-09",
+    "time": "4:30 PM",
+    "region": "Great Lakes",
+    "matchup": "Indiana vs Ohio",
+    "tv": "ESPN+",
+    "status": ""
+  },
+  {
+    "date": "2026-08-09",
+    "time": "6:00 PM",
+    "region": "West",
+    "matchup": "Arizona vs Hawaii",
+    "tv": "ESPN+",
+    "status": ""
+  },
+  {
+    "date": "2026-08-09",
+    "time": "7:00 PM",
+    "region": "Metro",
+    "matchup": "Rhode Island vs Connecticut",
+    "tv": "ESPN+",
+    "status": ""
+  },
+  {
+    "date": "2026-08-09",
+    "time": "7:00 PM",
+    "region": "Southwest",
+    "matchup": "Texas West vs Texas East",
+    "tv": "ESPN+",
+    "status": ""
+  },
+  {
+    "date": "2026-08-09",
+    "time": "7:30 PM",
+    "region": "Great Lakes",
+    "matchup": "Michigan vs Illinois",
+    "tv": "ESPN+",
+    "status": ""
+  },
+  {
+    "date": "2026-08-09",
+    "time": "9:00 PM",
+    "region": "Mountain",
+    "matchup": "Colorado vs Wyoming",
+    "tv": "ESPN+",
+    "status": ""
+  },
+  {
+    "date": "2026-08-10",
+    "time": "9:00 AM",
+    "region": "New England",
+    "matchup": "Vermont vs Massachusetts",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-10",
+    "time": "10:00 AM",
+    "region": "Midwest",
+    "matchup": "North Dakota vs Wisconsin",
+    "tv": "ESPN+",
+    "status": ""
+  },
+  {
+    "date": "2026-08-10",
+    "time": "11:00 AM",
+    "region": "Southeast",
+    "matchup": "Elimination Game",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-10",
+    "time": "1:00 PM",
+    "region": "Great Lakes",
+    "matchup": "Elimination Game",
+    "tv": "ESPN+",
+    "status": ""
+  },
+  {
+    "date": "2026-08-10",
+    "time": "1:00 PM",
+    "region": "Metro",
+    "matchup": "New York vs New Jersey",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-10",
+    "time": "3:00 PM",
+    "region": "Northwest",
+    "matchup": "Alaska vs Oregon",
+    "tv": "ESPN+",
+    "status": ""
+  },
+  {
+    "date": "2026-08-10",
+    "time": "3:00 PM",
+    "region": "Southwest",
+    "matchup": "Elimination Game",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-10",
+    "time": "4:00 PM",
+    "region": "Midwest",
+    "matchup": "Elimination Game",
+    "tv": "ESPN+",
+    "status": ""
+  },
+  {
+    "date": "2026-08-10",
+    "time": "5:00 PM",
+    "region": "Mid-Atlantic",
+    "matchup": "Maryland vs Loser Pennsylvania/Delaware",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-10",
+    "time": "6:00 PM",
+    "region": "West",
+    "matchup": "Elimination Game",
+    "tv": "ESPN+",
+    "status": ""
+  },
+  {
+    "date": "2026-08-10",
+    "time": "7:00 PM",
+    "region": "Great Lakes",
+    "matchup": "Winners' Bracket Game",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-10",
+    "time": "9:00 PM",
+    "region": "Mountain",
+    "matchup": "Elimination Game",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-11",
+    "time": "11:00 AM",
+    "region": "Mid-Atlantic",
+    "matchup": "Washington, DC vs Winner Pennsylvania/Delaware",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-11",
+    "time": "1:00 PM",
+    "region": "Great Lakes",
+    "matchup": "Elimination Game",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-11",
+    "time": "1:00 PM",
+    "region": "Mountain",
+    "matchup": "Nevada vs Utah",
+    "tv": "ESPN+",
+    "status": ""
+  },
+  {
+    "date": "2026-08-11",
+    "time": "3:00 PM",
+    "region": "Southeast",
+    "matchup": "\ud83c\udfc6 Southeast Championship",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-11",
+    "time": "5:00 PM",
+    "region": "Northwest",
+    "matchup": "Idaho vs Washington",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-11",
+    "time": "7:00 PM",
+    "region": "Southwest",
+    "matchup": "\ud83c\udfc6 Southwest Championship",
+    "tv": "ESPN2",
+    "status": ""
+  },
+  {
+    "date": "2026-08-11",
+    "time": "9:30 PM",
+    "region": "West",
+    "matchup": "Winners' Bracket Game",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-12",
+    "time": "11:00 AM",
+    "region": "Midwest",
+    "matchup": "Iowa vs Missouri",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-12",
+    "time": "1:00 PM",
+    "region": "New England",
+    "matchup": "Elimination/Semifinal",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-12",
+    "time": "3:00 PM",
+    "region": "Northwest",
+    "matchup": "Elimination/Semifinal",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-12",
+    "time": "5:00 PM",
+    "region": "Metro",
+    "matchup": "Elimination/Semifinal",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-12",
+    "time": "7:00 PM",
+    "region": "Great Lakes",
+    "matchup": "\ud83c\udfc6 Great Lakes Championship",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-12",
+    "time": "9:00 PM",
+    "region": "West",
+    "matchup": "Elimination/Semifinal",
+    "tv": "ESPN2",
+    "status": ""
+  },
+  {
+    "date": "2026-08-13",
+    "time": "1:00 PM",
+    "region": "Midwest",
+    "matchup": "Semifinal",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-13",
+    "time": "3:00 PM",
+    "region": "Mid-Atlantic",
+    "matchup": "Elimination/Semifinal",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-13",
+    "time": "5:00 PM",
+    "region": "Mountain",
+    "matchup": "Elimination/Semifinal",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-13",
+    "time": "7:00 PM",
+    "region": "New England",
+    "matchup": "\ud83c\udfc6 New England Championship",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-13",
+    "time": "9:00 PM",
+    "region": "Northwest",
+    "matchup": "\ud83c\udfc6 Northwest Championship",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-14",
+    "time": "1:00 PM",
+    "region": "Midwest",
+    "matchup": "\ud83c\udfc6 Midwest Championship",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-14",
+    "time": "3:00 PM",
+    "region": "Mid-Atlantic",
+    "matchup": "\ud83c\udfc6 Mid-Atlantic Championship",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-14",
+    "time": "5:00 PM",
+    "region": "Mountain",
+    "matchup": "\ud83c\udfc6 Mountain Championship",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-14",
+    "time": "7:00 PM",
+    "region": "Metro",
+    "matchup": "\ud83c\udfc6 Metro Championship",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-14",
+    "time": "9:00 PM",
+    "region": "West",
+    "matchup": "\ud83c\udfc6 West Championship",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-19",
+    "time": "3:00 PM",
+    "region": "World Series",
+    "matchup": "Southeast Champion vs Northwest Champion",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-19",
+    "time": "7:00 PM",
+    "region": "World Series",
+    "matchup": "Metro Champion vs New England Champion",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-20",
+    "time": "2:00 PM",
+    "region": "World Series",
+    "matchup": "Great Lakes Champion vs Mountain Champion",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-20",
+    "time": "6:00 PM",
+    "region": "World Series",
+    "matchup": "West Champion vs Midwest Champion",
+    "tv": "ESPN2",
+    "status": ""
+  },
+  {
+    "date": "2026-08-21",
+    "time": "3:00 PM",
+    "region": "World Series",
+    "matchup": "Southwest Champion vs Winner SE/NW",
+    "tv": "ESPN",
+    "status": ""
+  },
+  {
+    "date": "2026-08-21",
+    "time": "7:00 PM",
+    "region": "World Series",
+    "matchup": "Mid-Atlantic Champion vs Winner Metro/NE",
+    "tv": "ESPN",
+    "status": ""
+  }
+]

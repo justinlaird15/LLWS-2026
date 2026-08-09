@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f1115"><link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg"><title>2026 LLWS 12U TV Schedule</title>
+<style>
+:root{--bg:#0f1115;--card:#171a21;--text:#f4f7fb;--muted:#aeb7c4;--line:#2a2f39;--accent:#4ea1ff;--espn:#ff5a5f;--espn2:#ff9f43;--plus:#7ed957}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
+header{position:sticky;top:0;z-index:10;background:#0f1115f2;border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+.head,.wrap{max-width:900px;margin:auto;padding:14px}.title{display:flex;gap:12px;align-items:center}.logo{width:48px;height:48px;border-radius:12px}
+h1{font-size:1.3rem;margin:0}.sub,.updated{color:var(--muted);font-size:.84rem}.controls{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+button{background:#171a21;color:white;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-weight:700}.active{border-color:var(--accent)}
+.day{margin:18px 0}.day h2{font-size:1.05rem;border-left:4px solid var(--accent);padding:8px 10px;background:#12151b;border-radius:8px}
+.game{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:12px;margin:8px 0}.top{display:flex;justify-content:space-between;gap:10px}
+.time{font-weight:800}.region{color:var(--muted);font-size:.83rem;margin-top:5px}.match{font-weight:680;margin-top:2px}
+.badges{display:flex;gap:6px}.badge{font-size:.74rem;font-weight:900;padding:4px 8px;border-radius:999px}.espn{background:var(--espn)}.espn2{background:var(--espn2);color:#111}.espnp{background:var(--plus);color:#111}.final{background:#657080}
+.banner{background:#102338;border:1px solid #244b73;border-radius:12px;padding:10px;margin:12px 0;color:#d9ecff}.hidden{display:none}
+.note{color:var(--muted);font-size:.84rem;margin:24px 0;padding:12px;border:1px solid var(--line);border-radius:12px}
+</style></head>
+<body><header><div class="head"><div class="title"><img src="icon.svg" class="logo"><div><h1>2026 LLWS 12U TV Schedule</h1>
+<div class="sub">Regional games + Williamsport • Eastern Time</div><div id="updated" class="updated">Loading current schedule…</div></div></div>
+<div class="controls"><button id="upcoming" class="active">Upcoming</button><button id="all">All dates</button><button id="refresh">Refresh now</button><button id="install" hidden>Install app</button></div>
+</div></header><main class="wrap"><div id="banner" class="banner">Loading latest results…</div><div id="games"></div>
+<div class="note">The page checks <b>latest.json</b> each time it opens or you tap Refresh. GitHub Actions rebuilds that file from the official LittleLeague.org tournament pages on an hourly August schedule. Weather, postponements, TV changes, or a Little League page-layout change can temporarily affect automatic updates.</div></main>
+<script>
+let data=null, showAll=false;
+const pad=n=>String(n).padStart(2,'0');
+function localISO(){let d=new Date();return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}
+function fmtDate(s){return new Date(s+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})}
+function tvClass(tv){return tv==='ESPN+'?'espnp':tv==='ESPN2'?'espn2':'espn'}
+function render(){
+ if(!data)return; const today=localISO(); const holder=document.getElementById('games'); holder.innerHTML='';
+ const groups={}; data.games.forEach(g=>{if(showAll||g.date>=today)(groups[g.date]??=[]).push(g)});
+ Object.keys(groups).sort().forEach(date=>{
+   const s=document.createElement('section');s.className='day';s.innerHTML=`<h2>${fmtDate(date)}</h2>`;
+   groups[date].forEach(g=>{const d=document.createElement('div');d.className='game';
+     d.innerHTML=`<div class="top"><span class="time">${g.time}</span><span class="badges">${g.status?'<span class="badge final">FINAL</span>':''}<span class="badge ${tvClass(g.tv)}">${g.tv}</span></span></div><div class="region">${g.region}</div><div class="match">${g.matchup}</div>`;
+     s.appendChild(d)});holder.appendChild(s)
+ });
+ document.getElementById('banner').textContent=groups[today]?"Today's games are shown first.":"Next scheduled games are shown below.";
+}
+async function load(){
+ const b=document.getElementById('banner');b.textContent='Checking official results…';
+ try{const r=await fetch('latest.json?ts='+Date.now(),{cache:'no-store'});data=await r.json();document.getElementById('updated').textContent='Auto-updated: '+data.updated;render()}
+ catch(e){b.textContent='Could not refresh right now. Showing the last cached version if available.'}
+}
+document.getElementById('upcoming').onclick=()=>{showAll=false;upcoming.classList.add('active');all.classList.remove('active');render()}
+document.getElementById('all').onclick=()=>{showAll=true;all.classList.add('active');upcoming.classList.remove('active');render()}
+document.getElementById('refresh').onclick=load;
+let dp;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;install.hidden=false});
+install.onclick=async()=>{if(dp){dp.prompt();await dp.userChoice;dp=null;install.hidden=true}};
+if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
+load();
+</script></body></html>
