@@ -6,7 +6,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 import requests
-from bs4 import BeautifulSoup, Tag, NavigableString
+from bs4 import BeautifulSoup
 
 
 ROOT = Path(__file__).resolve().parent
@@ -17,60 +17,21 @@ BASE = json.loads(
 
 
 URLS = {
-    "Great Lakes":
-        "https://www.littleleague.org/world-series/2026/llbws/tournaments/great-lakes-region/",
-
-    "Metro":
-        "https://www.littleleague.org/world-series/2026/llbws/tournaments/metro-region/",
-
-    "Mid-Atlantic":
-        "https://www.littleleague.org/world-series/2026/llbws/tournaments/mid-atlantic-region/",
-
-    "Midwest":
-        "https://www.littleleague.org/world-series/2026/llbws/tournaments/midwest-region/",
-
-    "Mountain":
-        "https://www.littleleague.org/world-series/2026/llbws/tournaments/mountain-region/",
-
-    "New England":
-        "https://www.littleleague.org/world-series/2026/llbws/tournaments/new-england-region/",
-
-    "Northwest":
-        "https://www.littleleague.org/world-series/2026/llbws/tournaments/northwest-region/",
-
-    "Southeast":
-        "https://www.littleleague.org/world-series/2026/llbws/tournaments/southeast-region/",
-
-    "Southwest":
-        "https://www.littleleague.org/world-series/2026/llbws/tournaments/southwest-region/",
-
-    "West":
-        "https://www.littleleague.org/world-series/2026/llbws/tournaments/west-region/",
-
-    "World Series":
-        "https://www.littleleague.org/world-series/2026/llbws/tournaments/world-series/",
+    "Great Lakes": "https://www.littleleague.org/world-series/2026/llbws/tournaments/great-lakes-region/",
+    "Metro": "https://www.littleleague.org/world-series/2026/llbws/tournaments/metro-region/",
+    "Mid-Atlantic": "https://www.littleleague.org/world-series/2026/llbws/tournaments/mid-atlantic-region/",
+    "Midwest": "https://www.littleleague.org/world-series/2026/llbws/tournaments/midwest-region/",
+    "Mountain": "https://www.littleleague.org/world-series/2026/llbws/tournaments/mountain-region/",
+    "New England": "https://www.littleleague.org/world-series/2026/llbws/tournaments/new-england-region/",
+    "Northwest": "https://www.littleleague.org/world-series/2026/llbws/tournaments/northwest-region/",
+    "Southeast": "https://www.littleleague.org/world-series/2026/llbws/tournaments/southeast-region/",
+    "Southwest": "https://www.littleleague.org/world-series/2026/llbws/tournaments/southwest-region/",
+    "West": "https://www.littleleague.org/world-series/2026/llbws/tournaments/west-region/",
 }
 
 
 HEADERS = {
-    "User-Agent":
-        "Mozilla/5.0 (compatible; personal LLWS schedule dashboard/1.1)"
-}
-
-
-MONTHS = {
-    "January": 1,
-    "February": 2,
-    "March": 3,
-    "April": 4,
-    "May": 5,
-    "June": 6,
-    "July": 7,
-    "August": 8,
-    "September": 9,
-    "October": 10,
-    "November": 11,
-    "December": 12,
+    "User-Agent": "Mozilla/5.0"
 }
 
 
@@ -79,543 +40,166 @@ TZ_MAP = {
     "Central": "America/Chicago",
     "Mountain": "America/Denver",
     "Pacific": "America/Los_Angeles",
-    "ET": "America/New_York",
-    "CT": "America/Chicago",
-    "MT": "America/Denver",
-    "PT": "America/Los_Angeles",
 }
 
 
-DATE_RE = re.compile(
-    r"^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), "
-    r"([A-Z][a-z]+) (\d{1,2}), 2026$"
-)
-
-
-GAME_RE = re.compile(
-    r"^Game\s+(\d+)"
-    r"(?:\s*-\s*Championship)?"
-    r"\s*\|\s*"
-    r"(\d{1,2}:\d{2})\s*"
-    r"([ap]\.?m\.?)"
-    r"(?:\s*(ET|CT|MT|PT))?"
-    r"\s*-\s*"
-    r"([A-Z][a-z]+)\s+"
-    r"(\d{1,2})",
-    re.I,
-)
-
-
-def clean(text):
-    return re.sub(
-        r"\s+",
-        " ",
-        text or ""
-    ).strip()
-
-
-def page_timezone(soup):
-
-    text = soup.get_text(
-        " ",
-        strip=True
-    )
-
-    match = re.search(
-        r"All game times are "
-        r"(Eastern|Central|Mountain|Pacific) time",
-        text,
-        re.I,
-    )
-
-    if match:
-
-        name = match.group(1).title()
-
-        return TZ_MAP[name]
-
-    return "America/New_York"
-
-
-def to_eastern(
-    date_iso,
-    hhmm,
-    ampm,
-    page_tz,
-    explicit_abbr=None,
-):
-
-    ampm = ampm.replace(
-        ".",
-        ""
-    ).upper()
+def convert_to_eastern(date_iso, time_text, timezone_name):
 
     dt = datetime.strptime(
-        f"{date_iso} {hhmm} {ampm}",
-        "%Y-%m-%d %I:%M %p",
+        f"{date_iso} {time_text}",
+        "%Y-%m-%d %I:%M %p"
     )
 
-    source_tz = page_tz
-
-    if explicit_abbr:
-
-        source_tz = TZ_MAP.get(
-            explicit_abbr.upper(),
-            page_tz,
+    local = dt.replace(
+        tzinfo=ZoneInfo(
+            TZ_MAP.get(
+                timezone_name,
+                "America/New_York"
+            )
         )
-
-    localized = dt.replace(
-        tzinfo=ZoneInfo(source_tz)
     )
 
-    eastern = localized.astimezone(
+    eastern = local.astimezone(
         ZoneInfo("America/New_York")
     )
 
-    return eastern.strftime(
-        "%-I:%M %p"
-    )
+    return eastern.strftime("%-I:%M %p")
 
 
-def extract_game_from_elements(
-    game_info,
-    elements,
-):
-
-    teams = []
-
-    numeric_scores = []
-
-    for element in elements:
-
-        if (
-            isinstance(element, Tag)
-            and element.name == "h4"
-        ):
-
-            name = clean(
-                element.get_text(
-                    " ",
-                    strip=True
-                )
-            )
-
-            if (
-                name
-                and name not in teams
-            ):
-
-                teams.append(name)
-
-            continue
-
-        if isinstance(
-            element,
-            NavigableString
-        ):
-
-            text = clean(
-                str(element)
-            )
-
-            if re.fullmatch(
-                r"\d{1,2}",
-                text
-            ):
-
-                numeric_scores.append(
-                    text
-                )
-
-    teams = teams[:2]
-
-    if len(teams) < 2:
-
-        return None
-
-    if len(numeric_scores) >= 2:
-
-        matchup = (
-            f"{teams[0]} "
-            f"{numeric_scores[0]}"
-            f" — "
-            f"{teams[1]} "
-            f"{numeric_scores[1]}"
-        )
-
-        status = "FINAL"
-
-    else:
-
-        matchup = (
-            f"{teams[0]}"
-            f" vs "
-            f"{teams[1]}"
-        )
-
-        status = ""
-
-    return {
-        "date":
-            game_info["date"],
-
-        "time":
-            game_info["time"],
-
-        "region":
-            game_info["region"],
-
-        "matchup":
-            matchup,
-
-        "status":
-            status,
-    }
-
-
-def parse_page(
-    region,
-    url,
-):
+def parse_region(region, url):
 
     response = requests.get(
         url,
         headers=HEADERS,
-        timeout=30,
+        timeout=30
     )
 
     response.raise_for_status()
 
     soup = BeautifulSoup(
         response.text,
-        "html.parser",
+        "html.parser"
     )
 
-    source_tz = page_timezone(
-        soup
+    text = soup.get_text(
+        "\n",
+        strip=True
     )
 
-    schedule_heading = soup.find(
-        lambda tag:
-            isinstance(tag, Tag)
-            and tag.name in {"h2", "h3"}
-            and "Tournament Schedule"
-            in clean(
-                tag.get_text(
-                    " ",
-                    strip=True
-                )
-            )
+    # Determine the timezone used by this tournament page.
+    tz_match = re.search(
+        r"All game times are "
+        r"(Eastern|Central|Mountain|Pacific) time",
+        text
     )
 
-    if not schedule_heading:
+    timezone_name = (
+        tz_match.group(1)
+        if tz_match
+        else "Eastern"
+    )
 
-        raise RuntimeError(
-            "Tournament Schedule heading not found"
-        )
+    # Only examine the Tournament Schedule portion.
+    if "Tournament Schedule" in text:
+        text = text.split(
+            "Tournament Schedule",
+            1
+        )[1]
+
+    if "Secondary Navigation" in text:
+        text = text.split(
+            "Secondary Navigation",
+            1
+        )[0]
+
+    lines = [
+        line.strip()
+        for line in text.splitlines()
+        if line.strip()
+    ]
 
     games = []
 
     current_date = None
 
-    active = None
+    i = 0
 
-    active_elements = []
+    while i < len(lines):
 
+        line = lines[i]
 
-    def finish_active():
-
-        nonlocal active
-        nonlocal active_elements
-
-        if active:
-
-            parsed = (
-                extract_game_from_elements(
-                    active,
-                    active_elements,
-                )
-            )
-
-            if parsed:
-
-                games.append(
-                    parsed
-                )
-
-        active = None
-
-        active_elements = []
-
-
-    for element in (
-        schedule_heading.next_elements
-    ):
-
-        if (
-            isinstance(element, Tag)
-            and element.name == "h2"
-        ):
-
-            text = clean(
-                element.get_text(
-                    " ",
-                    strip=True
-                )
-            )
-
-            if (
-                text
-                == "Secondary Navigation"
-            ):
-
-                break
-
-
-        if (
-            isinstance(element, Tag)
-            and element.name == "h3"
-        ):
-
-            text = clean(
-                element.get_text(
-                    " ",
-                    strip=True
-                )
-            )
-
-            date_match = (
-                DATE_RE.match(text)
-            )
-
-            if date_match:
-
-                finish_active()
-
-                month = MONTHS[
-                    date_match.group(2)
-                ]
-
-                current_date = (
-                    f"2026-"
-                    f"{month:02d}-"
-                    f"{int(date_match.group(3)):02d}"
-                )
-
-                continue
-
-
-        if isinstance(
-            element,
-            NavigableString
-        ):
-
-            text = clean(
-                str(element)
-            )
-
-            game_match = (
-                GAME_RE.match(text)
-            )
-
-            if (
-                game_match
-                and current_date
-            ):
-
-                finish_active()
-
-                hhmm = (
-                    game_match.group(2)
-                )
-
-                ampm = (
-                    game_match.group(3)
-                )
-
-                explicit_tz = (
-                    game_match.group(4)
-                )
-
-                active = {
-                    "date":
-                        current_date,
-
-                    "time":
-                        to_eastern(
-                            current_date,
-                            hhmm,
-                            ampm,
-                            source_tz,
-                            explicit_tz,
-                        ),
-
-                    "region":
-                        region,
-                }
-
-                continue
-
-
-        if active:
-
-            active_elements.append(
-                element
-            )
-
-
-    finish_active()
-
-    return games
-
-
-scraped = []
-
-errors = []
-
-
-for region, url in URLS.items():
-
-    try:
-
-        parsed = parse_page(
-            region,
-            url,
+        # Example:
+        # Sunday, August 9, 2026
+        date_match = re.match(
+            r"(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), "
+            r"([A-Za-z]+) (\d{1,2}), 2026",
+            line
         )
 
-        if parsed:
+        if date_match:
 
-            scraped.extend(
-                parsed
+            current_date = datetime.strptime(
+                line,
+                "%A, %B %d, %Y"
+            ).strftime("%Y-%m-%d")
+
+            i += 1
+            continue
+
+
+        # Example:
+        # Game 2 | 1:00 p.m. - August 9
+        game_match = re.match(
+            r"Game\s+\d+"
+            r"(?:\s*-\s*Championship)?"
+            r"\s*\|\s*"
+            r"(\d{1,2}:\d{2})\s*"
+            r"([ap])\.?m\.?",
+            line,
+            re.I
+        )
+
+        if game_match and current_date:
+
+            time_text = (
+                game_match.group(1)
+                + " "
+                + game_match.group(2).upper()
+                + "M"
             )
 
-        else:
-
-            errors.append(
-                f"{region}: no games parsed"
+            game_time = convert_to_eastern(
+                current_date,
+                time_text,
+                timezone_name
             )
 
-    except Exception as exc:
+            # Gather lines belonging to this game,
+            # stopping at the next game/date.
+            block = []
 
-        errors.append(
-            f"{region}: "
-            f"{type(exc).__name__}: "
-            f"{exc}"
-        )
+            j = i + 1
 
-    time.sleep(0.15)
+            while j < len(lines):
 
+                next_line = lines[j]
 
-lookup = {
-    (
-        game["date"],
-        game["time"],
-        game["region"],
-    ): game
+                if re.match(
+                    r"Game\s+\d+",
+                    next_line
+                ):
+                    break
 
-    for game in scraped
-}
+                if re.match(
+                    r"(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), "
+                    r"[A-Za-z]+ \d{1,2}, 2026",
+                    next_line
+                ):
+                    break
 
+                block.append(next_line)
 
-out = []
-
-updated_count = 0
-
-
-for base_game in BASE:
-
-    row = dict(
-        base_game
-    )
-
-    official = lookup.get(
-        (
-            row["date"],
-            row["time"],
-            row["region"],
-        )
-    )
-
-    if official:
-
-        row["matchup"] = (
-            official["matchup"]
-        )
-
-        row["status"] = (
-            official["status"]
-        )
-
-        updated_count += 1
-
-    out.append(
-        row
-    )
+                j += 1
 
 
-payload = {
-
-    "updated":
-        datetime.now(
-            ZoneInfo("UTC")
-        ).strftime(
-            "%Y-%m-%d %H:%M UTC"
-        ),
-
-    "source":
-        "Official LittleLeague.org "
-        "tournament schedule pages",
-
-    "scraped_games":
-        len(scraped),
-
-    "matched_games":
-        updated_count,
-
-    "errors":
-        errors,
-
-    "games":
-        out,
-}
-
-
-(
-    ROOT / "latest.json"
-).write_text(
-
-    json.dumps(
-        payload,
-        indent=2,
-        ensure_ascii=False,
-    ),
-
-    encoding="utf-8",
-)
-
-
-print(
-    f"Scraped "
-    f"{len(scraped)} "
-    f"official games"
-)
-
-print(
-    f"Matched "
-    f"{updated_count} "
-    f"games in base schedule"
-)
-
-
-if errors:
-
-    print(
-        "Warnings:"
-    )
-
-    for error in errors:
-
-        print(
-            " -",
-            error
-        )
+            # Remove labels
