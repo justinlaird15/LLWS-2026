@@ -1,8 +1,8 @@
 {
-  "updated": "2026-08-09 23:33 UTC",
+  "updated": "2026-08-09 23:38 UTC",
   "source": "Official LittleLeague.org region and World Series schedules",
-  "scraped_games": 0,
-  "matched_games": 0,
+  "scraped_games": 76,
+  "matched_games": 52,
   "world_series_participants": {
     "Asia-Pacific": "West Seoul (B) LL",
     "Australia": "Ryde Little League",
@@ -15,24 +15,17 @@
     "Panama": "David Doleguita LL"
   },
   "errors": [
-    "Great Lakes: no games parsed",
-    "Metro: no games parsed",
-    "Mid-Atlantic: no games parsed",
-    "Midwest: no games parsed",
     "Mountain: no games parsed",
-    "New England: no games parsed",
     "Northwest: no games parsed",
-    "Southeast: no games parsed",
     "Southwest: no games parsed",
-    "West: no games parsed",
-    "World Series: no games parsed"
+    "West: no games parsed"
   ],
   "games": [
     {
       "date": "2026-08-09",
       "time": "10:00 AM",
       "region": "Mid-Atlantic",
-      "matchup": "Washington, DC 7 — Maryland 6",
+      "matchup": "Maryland 6 — Washington, DC 7",
       "tv": "ESPN+",
       "status": "FINAL"
     },
@@ -40,9 +33,9 @@
       "date": "2026-08-09",
       "time": "1:00 PM",
       "region": "Mid-Atlantic",
-      "matchup": "Pennsylvania vs Delaware",
+      "matchup": "Pennsylvania 8 — Delaware 1",
       "tv": "ESPN+",
-      "status": ""
+      "status": "FINAL"
     },
     {
       "date": "2026-08-09",
@@ -56,9 +49,9 @@
       "date": "2026-08-09",
       "time": "4:30 PM",
       "region": "Great Lakes",
-      "matchup": "Indiana vs Ohio",
+      "matchup": "Indiana 0 — Ohio 11",
       "tv": "ESPN+",
-      "status": ""
+      "status": "FINAL"
     },
     {
       "date": "2026-08-09",
@@ -120,7 +113,7 @@
       "date": "2026-08-10",
       "time": "11:00 AM",
       "region": "Southeast",
-      "matchup": "Elimination Game",
+      "matchup": "Florida vs Tennessee",
       "tv": "ESPN",
       "status": ""
     },
@@ -160,7 +153,7 @@
       "date": "2026-08-10",
       "time": "4:00 PM",
       "region": "Midwest",
-      "matchup": "Elimination Game",
+      "matchup": "Minnesota vs South Dakota",
       "tv": "ESPN+",
       "status": ""
     },
@@ -168,7 +161,7 @@
       "date": "2026-08-10",
       "time": "5:00 PM",
       "region": "Mid-Atlantic",
-      "matchup": "Maryland vs Loser Pennsylvania/Delaware",
+      "matchup": "Maryland vs Delaware",
       "tv": "ESPN",
       "status": ""
     },
@@ -184,7 +177,7 @@
       "date": "2026-08-10",
       "time": "7:00 PM",
       "region": "Great Lakes",
-      "matchup": "Winners' Bracket Game",
+      "matchup": "Ohio vs Kentucky",
       "tv": "ESPN",
       "status": ""
     },
@@ -200,7 +193,7 @@
       "date": "2026-08-11",
       "time": "11:00 AM",
       "region": "Mid-Atlantic",
-      "matchup": "Washington, DC vs Winner Pennsylvania/Delaware",
+      "matchup": "Washington, DC vs Pennsylvania",
       "tv": "ESPN",
       "status": ""
     },
@@ -384,7 +377,7 @@
       "date": "2026-08-19",
       "time": "1:00 PM",
       "region": "World Series",
-      "matchup": "Latin America Region vs Caribbean Region",
+      "matchup": "Ministerio Sobre Las Alas Del Aguila LL (Latin America) vs Los Nacionales LL (Caribbean)",
       "tv": "ESPN",
       "status": ""
     },
@@ -392,7 +385,7 @@
       "date": "2026-08-19",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "Southeast Champion vs Northwest Champion",
+      "matchup": "Southeast Region vs Northwest Region",
       "tv": "ESPN",
       "status": ""
     },
@@ -400,7 +393,7 @@
       "date": "2026-08-19",
       "time": "5:00 PM",
       "region": "World Series",
-      "matchup": "Canada Region vs Asia-Pacific Region",
+      "matchup": "Canada Region vs West Seoul (B) LL (Asia-Pacific)",
       "tv": "ESPN",
       "status": ""
     },
@@ -408,7 +401,7 @@
       "date": "2026-08-19",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "Metro Champion vs New England Champion",
+      "matchup": "Metro Region vs New England Region",
       "tv": "ESPN",
       "status": ""
     },
@@ -416,7 +409,7 @@
       "date": "2026-08-20",
       "time": "12:00 PM",
       "region": "World Series",
-      "matchup": "Australia Region vs Mexico Region",
+      "matchup": "Ryde Little League (Australia) vs Municipal De Tijuana LL (Mexico)",
       "tv": "ESPN",
       "status": ""
     },
@@ -424,7 +417,7 @@
       "date": "2026-08-20",
       "time": "2:00 PM",
       "region": "World Series",
-      "matchup": "Great Lakes Champion vs Mountain Champion",
+      "matchup": "Great Lakes Region vs Mountain Region",
       "tv": "ESPN",
       "status": ""
     },
@@ -432,7 +425,7 @@
       "date": "2026-08-20",
       "time": "4:00 PM",
       "region": "World Series",
-      "matchup": "Curaçao Region vs Japan Region",
+      "matchup": "Pariba LL (Curaçao) vs Joto LL (Japan)",
       "tv": "ESPN",
       "status": ""
     },
@@ -440,7 +433,7 @@
       "date": "2026-08-20",
       "time": "6:00 PM",
       "region": "World Series",
-      "matchup": "West Champion vs Midwest Champion",
+      "matchup": "West Region vs Midwest Region",
       "tv": "ESPN2",
       "status": ""
     },
@@ -448,7 +441,7 @@
       "date": "2026-08-21",
       "time": "1:00 PM",
       "region": "World Series",
-      "matchup": "Panama Region vs W1",
+      "matchup": "David Doleguita LL (Panama) vs W1",
       "tv": "ESPN",
       "status": ""
     },
@@ -456,7 +449,7 @@
       "date": "2026-08-21",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "Southwest Champion vs Winner SE/NW",
+      "matchup": "Southwest Region vs W2",
       "tv": "ESPN",
       "status": ""
     },
@@ -464,7 +457,7 @@
       "date": "2026-08-21",
       "time": "5:00 PM",
       "region": "World Series",
-      "matchup": "Europe-Africa Region vs W3",
+      "matchup": "South Czech Republic LL (Europe-Africa) vs W3",
       "tv": "ESPN",
       "status": ""
     },
@@ -472,7 +465,7 @@
       "date": "2026-08-21",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "Mid-Atlantic Champion vs Winner Metro/NE",
+      "matchup": "Mid-Atlantic Region vs W4",
       "tv": "ESPN",
       "status": ""
     },
@@ -656,7 +649,7 @@
       "date": "2026-08-29",
       "time": "12:30 PM",
       "region": "World Series",
-      "matchup": "W29 vs W33 — International Championship",
+      "matchup": "W29 vs W33",
       "tv": "ABC",
       "status": ""
     },
@@ -664,7 +657,7 @@
       "date": "2026-08-29",
       "time": "3:30 PM",
       "region": "World Series",
-      "matchup": "W30 vs W34 — United States Championship",
+      "matchup": "W30 vs W34",
       "tv": "ABC",
       "status": ""
     },
@@ -672,7 +665,7 @@
       "date": "2026-08-30",
       "time": "10:00 AM",
       "region": "World Series",
-      "matchup": "L35 vs L36 — Third-Place Game",
+      "matchup": "L35 vs L36",
       "tv": "ESPN",
       "status": ""
     },
@@ -680,7 +673,7 @@
       "date": "2026-08-30",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "W35 vs W36 — LLWS World Championship",
+      "matchup": "W35 vs W36",
       "tv": "ABC",
       "status": ""
     }
