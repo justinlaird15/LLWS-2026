@@ -201,5 +201,38 @@ def parse_region(region, url):
 
                 j += 1
 
+print("\n--- MID-ATLANTIC DIAGNOSTIC ---")
 
+url = URLS["Mid-Atlantic"]
+
+r = requests.get(
+    url,
+    headers=HEADERS,
+    timeout=30
+)
+
+print("HTTP status:", r.status_code)
+print("Downloaded characters:", len(r.text))
+
+print(
+    "Contains Pennsylvania:",
+    "Pennsylvania" in r.text
+)
+
+print(
+    "Contains Delaware:",
+    "Delaware" in r.text
+)
+
+print(
+    "Contains Tournament Schedule:",
+    "Tournament Schedule" in r.text
+)
+
+print(
+    "Contains Game 2:",
+    "Game 2" in r.text
+)
+
+print("--- END DIAGNOSTIC ---")
             # Remove labels
