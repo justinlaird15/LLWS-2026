@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 from playwright.sync_api import sync_playwright
 
 
@@ -19,9 +19,6 @@ BASE = json.loads(
     (ROOT / "base_schedule.json").read_text(encoding="utf-8")
 )
 
-
-# Only check GameChanger around the time a game could
-# reasonably be underway.
 GC_BEFORE_MINUTES = 20
 GC_AFTER_HOURS = 4
 
@@ -67,7 +64,7 @@ WORLD_SERIES_URL = (
 HEADERS = {
     "User-Agent":
         "Mozilla/5.0 "
-        "(compatible; personal LLWS schedule dashboard/7.0)"
+        "(compatible; personal LLWS schedule dashboard/7.1)"
 }
 
 
@@ -247,11 +244,7 @@ WORLD_SERIES_GAMES = [
 
 
 def clean(value):
-    return re.sub(
-        r"\s+",
-        " ",
-        value or ""
-    ).strip()
+    return re.sub(r"\s+", " ", value or "").strip()
 
 
 def fetch_soup(url):
@@ -284,51 +277,159 @@ def fetch_tokens(url):
 def get_gamechanger_links(url):
 
     """
-    Find GameChanger links while tracking the most recent
-    'Game N' heading on the Little League tournament page.
+    Associate each GameChanger Box Score URL with the correct
+    Game N by locating a game heading and searching only inside
+    that game's surrounding HTML container.
+
+    This is safer than remembering the most recently seen
+    Game N while walking through the entire document.
     """
 
     soup = fetch_soup(url)
 
     links = {}
 
-    current_game = None
+    game_markers = []
 
-    for element in soup.descendants:
 
-        if isinstance(element, str):
+    for tag in soup.find_all(
+        string=re.compile(
+            r"^\s*Game\s+\d+\b",
+            re.I
+        )
+    ):
 
-            text = clean(element)
+        text = clean(
+            str(tag)
+        )
 
-            match = re.match(
-                r"^Game\s+(\d+)\b",
+        match = re.match(
+            r"^Game\s+(\d+)\b",
+            text,
+            re.I
+        )
+
+        if not match:
+            continue
+
+        game_number = int(
+            match.group(1)
+        )
+
+        parent = (
+            tag.parent
+            if isinstance(
+                tag.parent,
+                Tag
+            )
+            else None
+        )
+
+        if parent:
+
+            game_markers.append(
+                (
+                    game_number,
+                    parent
+                )
+            )
+
+
+    for (
+        game_number,
+        marker
+    ) in game_markers:
+
+
+        node = marker
+
+        found = None
+
+
+        # Walk upward until we find the smallest container
+        # containing exactly one Game N marker and a GC link.
+        for _ in range(8):
+
+            if not isinstance(
+                node,
+                Tag
+            ):
+                break
+
+
+            text = clean(
+                node.get_text(
+                    " ",
+                    strip=True
+                )
+            )
+
+
+            game_numbers = re.findall(
+                r"\bGame\s+(\d+)\b",
                 text,
                 re.I
             )
 
-            if match:
 
-                current_game = int(
-                    match.group(1)
+            gc_links = [
+
+                a.get(
+                    "href"
                 )
 
-        elif getattr(
-            element,
-            "name",
-            None
-        ) == "a":
+                for a in node.find_all(
+                    "a",
+                    href=True
+                )
 
-            href = element.get(
-                "href",
-                ""
-            )
+                if "web.gc.com/" in a.get(
+                    "href",
+                    ""
+                )
+            ]
+
 
             if (
-                current_game is not None
-                and "web.gc.com/" in href
+                len(set(game_numbers)) == 1
+                and gc_links
             ):
 
-                links[current_game] = href
+                found = gc_links[0]
+                break
+
+
+            node = node.parent
+
+
+        if found:
+
+            links[
+                game_number
+            ] = found
+
+
+    print(
+        "\n--- GAMECHANGER LINK MAP ---"
+    )
+
+
+    if not links:
+
+        print(
+            "No GameChanger links found."
+        )
+
+
+    for game_number in sorted(
+        links
+    ):
+
+        print(
+            f"Game {game_number}:",
+            links[game_number]
+        )
+
 
     return links
 
@@ -349,12 +450,13 @@ def split_into_game_blocks(tokens):
         if match:
 
             if current:
-                blocks.append(current)
+                blocks.append(
+                    current
+                )
 
             current = {
                 "game_number":
                     int(match.group(1)),
-
                 "tokens":
                     [token]
             }
@@ -362,19 +464,29 @@ def split_into_game_blocks(tokens):
             continue
 
         if current:
-            current["tokens"].append(
+
+            current[
+                "tokens"
+            ].append(
                 token
             )
 
+
     if current:
-        blocks.append(current)
+
+        blocks.append(
+            current
+        )
+
 
     return blocks
 
 
 def page_timezone(tokens):
 
-    text = " ".join(tokens)
+    text = " ".join(
+        tokens
+    )
 
     match = re.search(
         r"All game times are "
@@ -413,7 +525,12 @@ def find_date_and_time(
 
     if not match:
 
-        return None, None, None
+        return (
+            None,
+            None,
+            None
+        )
+
 
     time_text = (
         match.group(1)
@@ -422,15 +539,21 @@ def find_date_and_time(
         + "M"
     )
 
-    explicit_tz = match.group(3)
+
+    explicit_tz = (
+        match.group(3)
+    )
+
 
     day = int(
         match.group(4)
     )
 
+
     source_date = (
         f"2026-08-{day:02d}"
     )
+
 
     if explicit_tz:
 
@@ -441,12 +564,16 @@ def find_date_and_time(
 
     else:
 
-        tz_name = source_timezone
+        tz_name = (
+            source_timezone
+        )
+
 
     dt = datetime.strptime(
         f"{source_date} {time_text}",
         "%Y-%m-%d %I:%M %p"
     )
+
 
     dt = dt.replace(
         tzinfo=ZoneInfo(
@@ -454,9 +581,11 @@ def find_date_and_time(
         )
     )
 
+
     eastern = dt.astimezone(
         EASTERN
     )
+
 
     return (
         eastern.strftime(
@@ -483,7 +612,9 @@ def extract_region_teams(
         if token in TEAM_ALIASES:
 
             normalized = (
-                TEAM_ALIASES[token]
+                TEAM_ALIASES[
+                    token
+                ]
             )
 
             if normalized not in teams:
@@ -495,6 +626,7 @@ def extract_region_teams(
                 raw_teams.append(
                     token
                 )
+
 
     return (
         teams[:2],
@@ -608,7 +740,9 @@ def static_status(
 
     if now >= (
         scheduled_dt
-        + timedelta(hours=3)
+        + timedelta(
+            hours=3
+        )
     ):
 
         return "FINAL"
@@ -626,13 +760,18 @@ def parse_region_page(
         url
     )
 
+
     gc_links = get_gamechanger_links(
         url
     )
 
+
     source_timezone = (
-        page_timezone(tokens)
+        page_timezone(
+            tokens
+        )
     )
+
 
     games = []
 
@@ -640,6 +779,7 @@ def parse_region_page(
     for block in split_into_game_blocks(
         tokens
     ):
+
 
         (
             date_iso,
@@ -744,7 +884,9 @@ def parse_region_page(
 
             "gc_url":
                 gc_links.get(
-                    block["game_number"]
+                    block[
+                        "game_number"
+                    ]
                 )
         })
 
@@ -829,6 +971,7 @@ def normalize_world_region(
             "Europe-Africa Region"
         )
 
+
     return label
 
 
@@ -884,7 +1027,9 @@ def display_world_side(
         return side
 
 
-    region = side[:-7]
+    region = side[
+        :-7
+    ]
 
 
     if region == "Europe-Africa":
@@ -895,7 +1040,9 @@ def display_world_side(
 
     else:
 
-        participant_key = region
+        participant_key = (
+            region
+        )
 
 
     team = participants.get(
@@ -935,10 +1082,9 @@ def parse_world_series_page():
         tokens
     ):
 
-        if (
-            block["game_number"]
-            > 38
-        ):
+        if block[
+            "game_number"
+        ] > 38:
 
             continue
 
@@ -1023,85 +1169,74 @@ def parse_world_series_page():
     )
 
 
-def normalize_for_match(text):
-
-    text = clean(
-        text
-    ).lower()
-
-    text = (
-        text
-        .replace(
-            "southern california",
-            "southern calif"
-        )
-        .replace(
-            "northern california",
-            "northern calif"
-        )
-        .replace(
-            "washington, d.c.",
-            "washington, dc"
-        )
-    )
-
-    return text
-
-
 def find_score_in_team_row(
     page,
     team_name,
     other_team
 ):
 
-    """
-    Find a visible element containing the team name.
-
-    Walk upward through its ancestors until we find the
-    smallest row/card that contains that team and a numeric
-    score, but NOT the opposing team.
-
-    This prevents one team's score from being accidentally
-    assigned to both teams.
-    """
-
     result = page.evaluate(
         """
         ({teamName, otherTeam}) => {
 
             function norm(value) {
-                return (value || "")
-                    .replace(/\\s+/g, " ")
-                    .trim()
-                    .toLowerCase();
+
+                return (
+                    value || ""
+                )
+                .replace(/\\s+/g, " ")
+                .trim()
+                .toLowerCase();
             }
 
-            const wanted = norm(teamName);
-            const other = norm(otherTeam);
+
+            const wanted =
+                norm(teamName);
+
+            const other =
+                norm(otherTeam);
+
 
             const elements =
                 Array.from(
-                    document.querySelectorAll("body *")
+                    document.querySelectorAll(
+                        "body *"
+                    )
                 );
 
+
             const matches =
-                elements.filter(el => {
+                elements.filter(
+                    el => {
 
-                    const txt =
-                        norm(el.innerText);
+                        const txt =
+                            norm(
+                                el.innerText
+                            );
 
-                    if (!txt) return false;
+                        if (!txt) {
 
-                    return (
-                        txt === wanted ||
-                        txt.includes(wanted)
-                    );
-                });
+                            return false;
+                        }
+
+                        return (
+                            txt === wanted
+                            ||
+                            txt.includes(
+                                wanted
+                            )
+                        );
+                    }
+                );
 
 
-            for (const el of matches) {
+            for (
+                const el
+                of matches
+            ) {
 
                 let node = el;
+
 
                 for (
                     let depth = 0;
@@ -1110,17 +1245,31 @@ def find_score_in_team_row(
                 ) {
 
                     const text =
-                        (node.innerText || "")
-                        .replace(/\\s+/g, " ")
+                        (
+                            node.innerText
+                            || ""
+                        )
+                        .replace(
+                            /\\s+/g,
+                            " "
+                        )
                         .trim();
 
+
                     const normalized =
-                        norm(text);
+                        norm(
+                            text
+                        );
+
 
                     if (
-                        normalized.includes(wanted)
+                        normalized.includes(
+                            wanted
+                        )
                         &&
-                        !normalized.includes(other)
+                        !normalized.includes(
+                            other
+                        )
                     ) {
 
                         const nums =
@@ -1128,20 +1277,33 @@ def find_score_in_team_row(
                                 /(?:^|\\s)(\\d{1,2})(?=\\s|$)/g
                             );
 
+
                         if (nums) {
 
                             const cleanNums =
                                 nums
-                                .map(x => x.trim())
-                                .filter(x => /^\\d{1,2}$/.test(x));
+                                .map(
+                                    x =>
+                                    x.trim()
+                                )
+                                .filter(
+                                    x =>
+                                    /^\\d{1,2}$/.test(
+                                        x
+                                    )
+                                );
+
 
                             if (
-                                cleanNums.length === 1
+                                cleanNums.length
+                                === 1
                             ) {
 
                                 return {
                                     score:
-                                        cleanNums[0],
+                                        cleanNums[
+                                            0
+                                        ],
 
                                     rowText:
                                         text
@@ -1150,10 +1312,12 @@ def find_score_in_team_row(
                         }
                     }
 
+
                     node =
                         node.parentElement;
                 }
             }
+
 
             return null;
         }
@@ -1167,6 +1331,7 @@ def find_score_in_team_row(
                 other_team
         }
     )
+
 
     return result
 
@@ -1183,6 +1348,14 @@ def inspect_gamechanger(
 
     if not url:
 
+        print(
+            "GC SKIP:",
+            game["region"],
+            "Game",
+            game["game_number"],
+            "has no GameChanger URL"
+        )
+
         return None
 
 
@@ -1194,6 +1367,12 @@ def inspect_gamechanger(
         game["team1"],
         "vs",
         game["team2"]
+    )
+
+
+    print(
+        "  URL:",
+        url
     )
 
 
@@ -1248,8 +1427,8 @@ def inspect_gamechanger(
 
             print(
                 "GC SKIP: could not "
-                "unambiguously pair both teams "
-                "with scores"
+                "unambiguously pair both "
+                "teams with scores"
             )
 
             return None
@@ -1258,6 +1437,7 @@ def inspect_gamechanger(
         score1 = row1[
             "score"
         ]
+
 
         score2 = row2[
             "score"
@@ -1289,11 +1469,15 @@ def inspect_gamechanger(
 
         if "FINAL" in upper:
 
-            status = "FINAL"
+            status = (
+                "FINAL"
+            )
 
         else:
 
-            status = "LIVE"
+            status = (
+                "LIVE"
+            )
 
 
         print(
@@ -1309,13 +1493,17 @@ def inspect_gamechanger(
 
         print(
             "  ROW 1:",
-            row1["rowText"][:200]
+            row1[
+                "rowText"
+            ][:200]
         )
 
 
         print(
             "  ROW 2:",
-            row2["rowText"][:200]
+            row2[
+                "rowText"
+            ][:200]
         )
 
 
@@ -1342,7 +1530,9 @@ def inspect_gamechanger(
         return None
 
 
-def should_check_gc(game):
+def should_check_gc(
+    game
+):
 
     if not game.get(
         "gc_url"
@@ -1351,18 +1541,11 @@ def should_check_gc(game):
         return False
 
 
-    # No reason to ask GC for something Little League
-    # already says is final.
     if game.get(
         "status"
     ) == "FINAL":
 
         return False
-
-
-    now = datetime.now(
-        EASTERN
-    )
 
 
     scheduled = game.get(
@@ -1375,10 +1558,16 @@ def should_check_gc(game):
         return False
 
 
+    now = datetime.now(
+        EASTERN
+    )
+
+
     start = (
         scheduled
         - timedelta(
-            minutes=GC_BEFORE_MINUTES
+            minutes=
+                GC_BEFORE_MINUTES
         )
     )
 
@@ -1386,7 +1575,8 @@ def should_check_gc(game):
     end = (
         scheduled
         + timedelta(
-            hours=GC_AFTER_HOURS
+            hours=
+                GC_AFTER_HOURS
         )
     )
 
@@ -1430,16 +1620,23 @@ def apply_gamechanger_live(
 
     with sync_playwright() as p:
 
-        browser = p.chromium.launch(
-            headless=True
+        browser = (
+            p.chromium.launch(
+                headless=True
+            )
         )
 
 
-        page = browser.new_page(
-            viewport={
-                "width": 1280,
-                "height": 1200
-            }
+        page = (
+            browser.new_page(
+                viewport={
+                    "width":
+                        1280,
+
+                    "height":
+                        1200
+                }
+            )
         )
 
 
@@ -1469,9 +1666,11 @@ def apply_gamechanger_live(
 
             game[
                 "status"
-            ] = result[
-                "status"
-            ]
+            ] = (
+                result[
+                    "status"
+                ]
+            )
 
 
         browser.close()
@@ -1608,10 +1807,6 @@ except Exception as exc:
     )
 
 
-# --------------------------------------------------
-# GAMECHANGER LIVE PASS
-# --------------------------------------------------
-
 scraped = apply_gamechanger_live(
     scraped
 )
@@ -1631,6 +1826,7 @@ lookup = {
 
 
 output = []
+
 matched = 0
 
 
@@ -1653,12 +1849,18 @@ for base_game in BASE:
     if official:
 
         row["matchup"] = (
-            official["matchup"]
+            official[
+                "matchup"
+            ]
         )
 
+
         row["status"] = (
-            official["status"]
+            official[
+                "status"
+            ]
         )
+
 
         matched += 1
 
@@ -1671,6 +1873,7 @@ for base_game in BASE:
 output.sort(
     key=lambda game: (
         game["date"],
+
         datetime.strptime(
             game["time"],
             "%I:%M %p"
@@ -1680,6 +1883,7 @@ output.sort(
 
 
 payload = {
+
     "updated":
         datetime.now(
             UTC
@@ -1688,8 +1892,9 @@ payload = {
         ),
 
     "source":
-        "Official LittleLeague.org schedules "
-        "+ GameChanger live scoring",
+        "Official LittleLeague.org "
+        "schedules + GameChanger "
+        "live scoring",
 
     "scraped_games":
         len(scraped),
@@ -1711,11 +1916,13 @@ payload = {
 (
     ROOT / "latest.json"
 ).write_text(
+
     json.dumps(
         payload,
         indent=2,
         ensure_ascii=False
     ),
+
     encoding="utf-8"
 )
 
@@ -1768,22 +1975,41 @@ for game in live_games:
 
 
 print(
-    "\n--- FINALS ---"
+    "\n--- MIDWEST TODAY ---"
 )
 
 
 for game in scraped:
 
-    if game.get(
-        "status"
-    ) == "FINAL":
+    if (
+        game["region"]
+        == "Midwest"
+        and game["date"]
+        == "2026-08-10"
+    ):
 
         print(
-            game["region"],
-            game["date"],
-            game["time"],
-            game["matchup"],
-            "FINAL"
+            "Game",
+            game[
+                "game_number"
+            ],
+
+            game[
+                "time"
+            ],
+
+            game[
+                "matchup"
+            ],
+
+            game[
+                "status"
+            ],
+
+            "GC:",
+            game.get(
+                "gc_url"
+            )
         )
 
 
@@ -1793,9 +2019,10 @@ if errors:
         "\nWarnings:"
     )
 
+
     for error in errors:
 
         print(
             " -",
             error
-    )
+)
