@@ -64,7 +64,7 @@ WORLD_SERIES_URL = (
 HEADERS = {
     "User-Agent":
         "Mozilla/5.0 "
-        "(compatible; personal LLWS schedule dashboard/7.1)"
+        "(compatible; personal LLWS schedule dashboard/8.0)"
 }
 
 
@@ -247,8 +247,28 @@ def clean(value):
     return re.sub(r"\s+", " ", value or "").strip()
 
 
-def fetch_soup(url):
+def normalize_team(value):
+    value = clean(value).lower()
 
+    value = value.replace("washington, d.c.", "washington, dc")
+    value = value.replace("southern california", "southern calif")
+    value = value.replace("northern california", "northern calif")
+
+    return value
+
+
+def team_matches(value, team):
+    value = normalize_team(value)
+    team = normalize_team(team)
+
+    return (
+        value == team
+        or team in value
+        or value in team
+    )
+
+
+def fetch_soup(url):
     response = requests.get(
         url,
         headers=HEADERS,
@@ -264,7 +284,6 @@ def fetch_soup(url):
 
 
 def fetch_tokens(url):
-
     soup = fetch_soup(url)
 
     return [
@@ -275,33 +294,16 @@ def fetch_tokens(url):
 
 
 def get_gamechanger_links(url):
-
-    """
-    Associate each GameChanger Box Score URL with the correct
-    Game N by locating a game heading and searching only inside
-    that game's surrounding HTML container.
-
-    This is safer than remembering the most recently seen
-    Game N while walking through the entire document.
-    """
-
     soup = fetch_soup(url)
 
     links = {}
-
     game_markers = []
 
-
     for tag in soup.find_all(
-        string=re.compile(
-            r"^\s*Game\s+\d+\b",
-            re.I
-        )
+        string=re.compile(r"^\s*Game\s+\d+\b", re.I)
     ):
 
-        text = clean(
-            str(tag)
-        )
+        text = clean(str(tag))
 
         match = re.match(
             r"^Game\s+(\d+)\b",
@@ -312,50 +314,28 @@ def get_gamechanger_links(url):
         if not match:
             continue
 
-        game_number = int(
-            match.group(1)
-        )
+        game_number = int(match.group(1))
 
         parent = (
             tag.parent
-            if isinstance(
-                tag.parent,
-                Tag
-            )
+            if isinstance(tag.parent, Tag)
             else None
         )
 
         if parent:
-
             game_markers.append(
-                (
-                    game_number,
-                    parent
-                )
+                (game_number, parent)
             )
 
-
-    for (
-        game_number,
-        marker
-    ) in game_markers:
-
+    for game_number, marker in game_markers:
 
         node = marker
-
         found = None
 
-
-        # Walk upward until we find the smallest container
-        # containing exactly one Game N marker and a GC link.
         for _ in range(8):
 
-            if not isinstance(
-                node,
-                Tag
-            ):
+            if not isinstance(node, Tag):
                 break
-
 
             text = clean(
                 node.get_text(
@@ -364,78 +344,37 @@ def get_gamechanger_links(url):
                 )
             )
 
-
             game_numbers = re.findall(
                 r"\bGame\s+(\d+)\b",
                 text,
                 re.I
             )
 
-
             gc_links = [
-
-                a.get(
-                    "href"
-                )
-
+                a.get("href")
                 for a in node.find_all(
                     "a",
                     href=True
                 )
-
-                if "web.gc.com/" in a.get(
-                    "href",
-                    ""
-                )
+                if "web.gc.com/" in a.get("href", "")
             ]
-
 
             if (
                 len(set(game_numbers)) == 1
                 and gc_links
             ):
-
                 found = gc_links[0]
                 break
 
-
             node = node.parent
 
-
         if found:
-
-            links[
-                game_number
-            ] = found
-
-
-    print(
-        "\n--- GAMECHANGER LINK MAP ---"
-    )
-
-
-    if not links:
-
-        print(
-            "No GameChanger links found."
-        )
-
-
-    for game_number in sorted(
-        links
-    ):
-
-        print(
-            f"Game {game_number}:",
-            links[game_number]
-        )
-
+            links[game_number] = found
 
     return links
 
 
 def split_into_game_blocks(tokens):
-
     blocks = []
     current = None
 
@@ -450,43 +389,26 @@ def split_into_game_blocks(tokens):
         if match:
 
             if current:
-                blocks.append(
-                    current
-                )
+                blocks.append(current)
 
             current = {
-                "game_number":
-                    int(match.group(1)),
-                "tokens":
-                    [token]
+                "game_number": int(match.group(1)),
+                "tokens": [token]
             }
 
             continue
 
         if current:
-
-            current[
-                "tokens"
-            ].append(
-                token
-            )
-
+            current["tokens"].append(token)
 
     if current:
-
-        blocks.append(
-            current
-        )
-
+        blocks.append(current)
 
     return blocks
 
 
 def page_timezone(tokens):
-
-    text = " ".join(
-        tokens
-    )
+    text = " ".join(tokens)
 
     match = re.search(
         r"All game times are "
@@ -496,7 +418,6 @@ def page_timezone(tokens):
     )
 
     if match:
-
         return TZ_MAP[
             match.group(1).title()
         ]
@@ -509,9 +430,7 @@ def find_date_and_time(
     source_timezone
 ):
 
-    text = " ".join(
-        block_tokens
-    )
+    text = " ".join(block_tokens)
 
     match = re.search(
         r"(\d{1,2}:\d{2})\s*"
@@ -524,13 +443,7 @@ def find_date_and_time(
     )
 
     if not match:
-
-        return (
-            None,
-            None,
-            None
-        )
-
+        return None, None, None
 
     time_text = (
         match.group(1)
@@ -539,71 +452,43 @@ def find_date_and_time(
         + "M"
     )
 
+    explicit_tz = match.group(3)
 
-    explicit_tz = (
-        match.group(3)
-    )
-
-
-    day = int(
-        match.group(4)
-    )
-
+    day = int(match.group(4))
 
     source_date = (
         f"2026-08-{day:02d}"
     )
 
-
     if explicit_tz:
-
         tz_name = TZ_MAP.get(
             explicit_tz.upper(),
             source_timezone
         )
-
     else:
-
-        tz_name = (
-            source_timezone
-        )
-
+        tz_name = source_timezone
 
     dt = datetime.strptime(
         f"{source_date} {time_text}",
         "%Y-%m-%d %I:%M %p"
     )
 
-
     dt = dt.replace(
-        tzinfo=ZoneInfo(
-            tz_name
-        )
+        tzinfo=ZoneInfo(tz_name)
     )
-
 
     eastern = dt.astimezone(
         EASTERN
     )
 
-
     return (
-        eastern.strftime(
-            "%Y-%m-%d"
-        ),
-
-        eastern.strftime(
-            "%-I:%M %p"
-        ),
-
+        eastern.strftime("%Y-%m-%d"),
+        eastern.strftime("%-I:%M %p"),
         eastern
     )
 
 
-def extract_region_teams(
-    block_tokens
-):
-
+def extract_region_teams(block_tokens):
     teams = []
     raw_teams = []
 
@@ -611,22 +496,11 @@ def extract_region_teams(
 
         if token in TEAM_ALIASES:
 
-            normalized = (
-                TEAM_ALIASES[
-                    token
-                ]
-            )
+            normalized = TEAM_ALIASES[token]
 
             if normalized not in teams:
-
-                teams.append(
-                    normalized
-                )
-
-                raw_teams.append(
-                    token
-                )
-
+                teams.append(normalized)
+                raw_teams.append(token)
 
     return (
         teams[:2],
@@ -641,36 +515,27 @@ def score_for_team(
 ):
 
     try:
-
-        start = block_tokens.index(
-            raw_team
-        )
+        start = block_tokens.index(raw_team)
 
     except ValueError:
-
         return None
 
-
     try:
-
         end = block_tokens.index(
             other_raw_team,
             start + 1
         )
 
     except ValueError:
-
         end = min(
             len(block_tokens),
             start + 12
         )
 
-
     segment = block_tokens[
         start + 1:
         end
     ]
-
 
     for token in segment:
 
@@ -679,9 +544,7 @@ def score_for_team(
             token,
             re.I
         ):
-
             continue
-
 
         if token.upper() in {
             "FINAL",
@@ -693,17 +556,13 @@ def score_for_team(
             "ESPN+",
             "ABC",
         }:
-
             continue
-
 
         if re.fullmatch(
             r"\d{1,2}",
             token
         ):
-
             return token
-
 
     return None
 
@@ -719,34 +578,24 @@ def static_status(
         score1 is None
         or score2 is None
     ):
-
         return ""
-
 
     text = " ".join(
         block_tokens
     ).upper()
 
-
     if "FINAL" in text:
-
         return "FINAL"
-
 
     now = datetime.now(
         EASTERN
     )
 
-
     if now >= (
         scheduled_dt
-        + timedelta(
-            hours=3
-        )
+        + timedelta(hours=3)
     ):
-
         return "FINAL"
-
 
     return "LIVE"
 
@@ -756,50 +605,37 @@ def parse_region_page(
     url
 ):
 
-    tokens = fetch_tokens(
-        url
-    )
-
+    tokens = fetch_tokens(url)
 
     gc_links = get_gamechanger_links(
         url
     )
 
-
-    source_timezone = (
-        page_timezone(
-            tokens
-        )
+    source_timezone = page_timezone(
+        tokens
     )
 
-
     games = []
-
 
     for block in split_into_game_blocks(
         tokens
     ):
 
-
         (
             date_iso,
             game_time,
             scheduled_dt
-
         ) = find_date_and_time(
             block["tokens"],
             source_timezone
         )
 
-
         (
             teams,
             raw_teams
-
         ) = extract_region_teams(
             block["tokens"]
         )
-
 
         if (
             not date_iso
@@ -808,9 +644,7 @@ def parse_region_page(
             or len(teams) < 2
             or len(raw_teams) < 2
         ):
-
             continue
-
 
         score1 = score_for_team(
             block["tokens"],
@@ -818,13 +652,11 @@ def parse_region_page(
             raw_teams[1]
         )
 
-
         score2 = score_for_team(
             block["tokens"],
             raw_teams[1],
             "__END_OF_GAME__"
         )
-
 
         status = static_status(
             scheduled_dt,
@@ -832,7 +664,6 @@ def parse_region_page(
             score2,
             block["tokens"]
         )
-
 
         if status in {
             "LIVE",
@@ -853,94 +684,49 @@ def parse_region_page(
                 f"{teams[1]}"
             )
 
-
         games.append({
-            "date":
-                date_iso,
-
-            "time":
-                game_time,
-
-            "region":
-                region,
-
-            "matchup":
-                matchup,
-
-            "status":
-                status,
-
-            "game_number":
-                block["game_number"],
-
-            "scheduled_dt":
-                scheduled_dt,
-
-            "team1":
-                teams[0],
-
-            "team2":
-                teams[1],
-
-            "gc_url":
-                gc_links.get(
-                    block[
-                        "game_number"
-                    ]
-                )
+            "date": date_iso,
+            "time": game_time,
+            "region": region,
+            "matchup": matchup,
+            "status": status,
+            "game_number": block["game_number"],
+            "scheduled_dt": scheduled_dt,
+            "team1": teams[0],
+            "team2": teams[1],
+            "gc_url": gc_links.get(
+                block["game_number"]
+            )
         })
-
 
     return games
 
 
-def participant_map_from_tokens(
-    tokens
-):
-
+def participant_map_from_tokens(tokens):
     try:
-
         end_index = tokens.index(
             "Tournament Schedule"
         )
 
-        prefix = tokens[
-            :end_index
-        ]
+        prefix = tokens[:end_index]
 
     except ValueError:
-
         prefix = tokens
 
-
     mapping = {}
-
 
     for region in PARTICIPANT_REGIONS:
 
         try:
-
-            index = prefix.index(
-                region
-            )
+            index = prefix.index(region)
 
         except ValueError:
-
             continue
 
-
-        if (
-            index + 1
-            >= len(prefix)
-        ):
-
+        if index + 1 >= len(prefix):
             continue
 
-
-        team = prefix[
-            index + 1
-        ]
-
+        team = prefix[index + 1]
 
         if team not in {
             "TBA",
@@ -949,56 +735,31 @@ def participant_map_from_tokens(
             "City/Country",
             "Record"
         }:
-
-            mapping[
-                region
-            ] = team
-
+            mapping[region] = team
 
     return mapping
 
 
-def normalize_world_region(
-    label
-):
-
-    if (
-        label
-        == "Europe & Africa Region"
-    ):
-
-        return (
-            "Europe-Africa Region"
-        )
-
+def normalize_world_region(label):
+    if label == "Europe & Africa Region":
+        return "Europe-Africa Region"
 
     return label
 
 
-def world_side_candidates(
-    block_tokens
-):
-
+def world_side_candidates(block_tokens):
     sides = []
-
 
     for token in block_tokens:
 
-        normalized = (
-            normalize_world_region(
-                token
-            )
+        normalized = normalize_world_region(
+            token
         )
-
 
         if normalized in WORLD_REGION_LABELS:
 
             if normalized not in sides:
-
-                sides.append(
-                    normalized
-                )
-
+                sides.append(normalized)
 
         elif re.fullmatch(
             r"[WL]\d+",
@@ -1006,11 +767,7 @@ def world_side_candidates(
         ):
 
             if token not in sides:
-
-                sides.append(
-                    token
-                )
-
+                sides.append(token)
 
     return sides[:2]
 
@@ -1020,90 +777,59 @@ def display_world_side(
     participants
 ):
 
-    if not side.endswith(
-        " Region"
-    ):
-
+    if not side.endswith(" Region"):
         return side
 
-
-    region = side[
-        :-7
-    ]
-
+    region = side[:-7]
 
     if region == "Europe-Africa":
-
-        participant_key = (
-            "Europe & Africa"
-        )
-
+        participant_key = "Europe & Africa"
     else:
-
-        participant_key = (
-            region
-        )
-
+        participant_key = region
 
     team = participants.get(
         participant_key
     )
 
-
     if team:
-
         return (
             f"{team} "
             f"({region})"
         )
 
-
     return side
 
 
 def parse_world_series_page():
-
     tokens = fetch_tokens(
         WORLD_SERIES_URL
     )
 
-
-    participants = (
-        participant_map_from_tokens(
-            tokens
-        )
+    participants = participant_map_from_tokens(
+        tokens
     )
 
-
     games = []
-
 
     for block in split_into_game_blocks(
         tokens
     ):
 
-        if block[
-            "game_number"
-        ] > 38:
-
+        if block["game_number"] > 38:
             continue
-
 
         (
             date_iso,
             game_time,
             scheduled_dt
-
         ) = find_date_and_time(
             block["tokens"],
             "America/New_York"
         )
 
-
         sides = world_side_candidates(
             block["tokens"]
         )
-
 
         if (
             not date_iso
@@ -1111,62 +837,264 @@ def parse_world_series_page():
             or scheduled_dt is None
             or len(sides) < 2
         ):
-
             continue
 
-
         display_sides = [
-
             display_world_side(
                 side,
                 participants
             )
-
             for side in sides
         ]
 
-
         games.append({
-            "date":
-                date_iso,
-
-            "time":
-                game_time,
-
-            "region":
-                "World Series",
-
+            "date": date_iso,
+            "time": game_time,
+            "region": "World Series",
             "matchup":
-                (
-                    f"{display_sides[0]}"
-                    f" vs "
-                    f"{display_sides[1]}"
-                ),
-
-            "status":
-                "",
-
-            "game_number":
-                block["game_number"],
-
-            "scheduled_dt":
-                scheduled_dt,
-
-            "team1":
-                display_sides[0],
-
-            "team2":
-                display_sides[1],
-
-            "gc_url":
-                None
+                f"{display_sides[0]}"
+                f" vs "
+                f"{display_sides[1]}",
+            "status": "",
+            "game_number": block["game_number"],
+            "scheduled_dt": scheduled_dt,
+            "team1": display_sides[0],
+            "team2": display_sides[1],
+            "gc_url": None
         })
 
+    return games, participants
 
-    return (
-        games,
-        participants
+
+# =====================================================
+# GAMECHANGER LIVE SCORE HELPERS
+# =====================================================
+
+
+def valid_score(value):
+    try:
+        number = int(value)
+    except (ValueError, TypeError):
+        return None
+
+    if 0 <= number <= 30:
+        return str(number)
+
+    return None
+
+
+def find_score_fields(obj):
+    """
+    Search one JSON dictionary for likely score fields.
+    """
+
+    if not isinstance(obj, dict):
+        return None
+
+    preferred = [
+        "score",
+        "runs",
+        "points",
+        "totalScore",
+        "total_score",
+        "teamScore",
+        "team_score",
+    ]
+
+    for key in preferred:
+
+        if key in obj:
+
+            score = valid_score(
+                obj[key]
+            )
+
+            if score is not None:
+                return score
+
+    for key, value in obj.items():
+
+        lower = str(key).lower()
+
+        if (
+            "score" in lower
+            or lower == "runs"
+            or lower.endswith("_runs")
+        ):
+
+            score = valid_score(value)
+
+            if score is not None:
+                return score
+
+    return None
+
+
+def extract_team_records(
+    obj,
+    team1,
+    team2,
+    found=None
+):
+
+    """
+    Recursively search GameChanger JSON data for dictionaries
+    that contain a team name and a nearby score field.
+    """
+
+    if found is None:
+        found = {
+            "team1": [],
+            "team2": []
+        }
+
+    if isinstance(obj, dict):
+
+        scalar_text = " ".join(
+            str(value)
+            for value in obj.values()
+            if isinstance(
+                value,
+                (
+                    str,
+                    int,
+                    float
+                )
+            )
+        )
+
+        score = find_score_fields(
+            obj
+        )
+
+        if score is not None:
+
+            if team_matches(
+                scalar_text,
+                team1
+            ):
+                found[
+                    "team1"
+                ].append(
+                    (
+                        score,
+                        scalar_text[:250]
+                    )
+                )
+
+            if team_matches(
+                scalar_text,
+                team2
+            ):
+                found[
+                    "team2"
+                ].append(
+                    (
+                        score,
+                        scalar_text[:250]
+                    )
+                )
+
+        for value in obj.values():
+
+            if isinstance(
+                value,
+                (dict, list)
+            ):
+
+                extract_team_records(
+                    value,
+                    team1,
+                    team2,
+                    found
+                )
+
+    elif isinstance(obj, list):
+
+        for value in obj:
+
+            extract_team_records(
+                value,
+                team1,
+                team2,
+                found
+            )
+
+    return found
+
+
+def choose_unique_score(records):
+    scores = []
+
+    for score, _ in records:
+
+        if score not in scores:
+            scores.append(score)
+
+    if len(scores) == 1:
+        return scores[0]
+
+    return None
+
+
+def inspect_gc_json(
+    captured_json,
+    game
+):
+
+    combined = {
+        "team1": [],
+        "team2": []
+    }
+
+    for payload in captured_json:
+
+        found = extract_team_records(
+            payload,
+            game["team1"],
+            game["team2"]
+        )
+
+        combined[
+            "team1"
+        ].extend(
+            found["team1"]
+        )
+
+        combined[
+            "team2"
+        ].extend(
+            found["team2"]
+        )
+
+    score1 = choose_unique_score(
+        combined["team1"]
     )
+
+    score2 = choose_unique_score(
+        combined["team2"]
+    )
+
+    if (
+        score1 is None
+        or score2 is None
+    ):
+        return None
+
+    print(
+        "  GC JSON MATCH:",
+        game["team1"],
+        score1,
+        "—",
+        game["team2"],
+        score2
+    )
+
+    return {
+        "score1": score1,
+        "score2": score2,
+        "method": "JSON"
+    }
 
 
 def find_score_in_team_row(
@@ -1175,101 +1103,72 @@ def find_score_in_team_row(
     other_team
 ):
 
-    result = page.evaluate(
+    return page.evaluate(
         """
         ({teamName, otherTeam}) => {
 
             function norm(value) {
-
-                return (
-                    value || ""
-                )
-                .replace(/\\s+/g, " ")
-                .trim()
-                .toLowerCase();
+                return (value || "")
+                    .replace(/\\s+/g, " ")
+                    .trim()
+                    .toLowerCase();
             }
 
+            function validScore(value) {
+                if (!/^\\d{1,2}$/.test(value)) {
+                    return false;
+                }
 
-            const wanted =
-                norm(teamName);
+                const n = Number(value);
 
-            const other =
-                norm(otherTeam);
+                return n >= 0 && n <= 30;
+            }
 
+            const wanted = norm(teamName);
+            const other = norm(otherTeam);
 
             const elements =
                 Array.from(
-                    document.querySelectorAll(
-                        "body *"
-                    )
+                    document.querySelectorAll("body *")
                 );
-
 
             const matches =
-                elements.filter(
-                    el => {
+                elements.filter(el => {
 
-                        const txt =
-                            norm(
-                                el.innerText
-                            );
+                    const txt =
+                        norm(el.innerText);
 
-                        if (!txt) {
-
-                            return false;
-                        }
-
-                        return (
-                            txt === wanted
-                            ||
-                            txt.includes(
-                                wanted
-                            )
-                        );
+                    if (!txt) {
+                        return false;
                     }
-                );
 
+                    return txt.includes(
+                        wanted
+                    );
+                });
 
-            for (
-                const el
-                of matches
-            ) {
+            for (const el of matches) {
 
                 let node = el;
 
-
                 for (
                     let depth = 0;
-                    depth < 7 && node;
+                    depth < 9 && node;
                     depth++
                 ) {
 
                     const text =
-                        (
-                            node.innerText
-                            || ""
-                        )
-                        .replace(
-                            /\\s+/g,
-                            " "
-                        )
+                        (node.innerText || "")
+                        .replace(/\\s+/g, " ")
                         .trim();
 
-
                     const normalized =
-                        norm(
-                            text
-                        );
-
+                        norm(text);
 
                     if (
-                        normalized.includes(
-                            wanted
-                        )
+                        normalized.includes(wanted)
                         &&
-                        !normalized.includes(
-                            other
-                        )
+                        !normalized.includes(other)
                     ) {
 
                         const nums =
@@ -1277,33 +1176,23 @@ def find_score_in_team_row(
                                 /(?:^|\\s)(\\d{1,2})(?=\\s|$)/g
                             );
 
-
                         if (nums) {
 
                             const cleanNums =
                                 nums
-                                .map(
-                                    x =>
-                                    x.trim()
-                                )
-                                .filter(
-                                    x =>
-                                    /^\\d{1,2}$/.test(
-                                        x
-                                    )
-                                );
+                                .map(x => x.trim())
+                                .filter(validScore);
 
+                            const unique =
+                                [...new Set(cleanNums)];
 
                             if (
-                                cleanNums.length
-                                === 1
+                                unique.length === 1
                             ) {
 
                                 return {
                                     score:
-                                        cleanNums[
-                                            0
-                                        ],
+                                        unique[0],
 
                                     rowText:
                                         text
@@ -1312,28 +1201,136 @@ def find_score_in_team_row(
                         }
                     }
 
-
                     node =
                         node.parentElement;
                 }
             }
 
-
             return null;
         }
         """,
-
         {
-            "teamName":
-                team_name,
-
-            "otherTeam":
-                other_team
+            "teamName": team_name,
+            "otherTeam": other_team
         }
     )
 
 
-    return result
+def score_from_visible_lines(
+    body_text,
+    team_name
+):
+
+    """
+    Last-resort parser.
+
+    Finds the team name in the visible page text and looks
+    immediately around it for a reasonable baseball score.
+    """
+
+    lines = [
+        clean(line)
+        for line in body_text.splitlines()
+        if clean(line)
+    ]
+
+    wanted = normalize_team(
+        team_name
+    )
+
+    candidates = []
+
+    for index, line in enumerate(lines):
+
+        if wanted not in normalize_team(
+            line
+        ):
+            continue
+
+        start = max(
+            0,
+            index - 2
+        )
+
+        end = min(
+            len(lines),
+            index + 4
+        )
+
+        nearby = lines[
+            start:end
+        ]
+
+        for offset, nearby_line in enumerate(
+            nearby
+        ):
+
+            if normalize_team(
+                nearby_line
+            ) == wanted:
+
+                continue
+
+            match = re.fullmatch(
+                r"\d{1,2}",
+                nearby_line
+            )
+
+            if not match:
+                continue
+
+            score = valid_score(
+                nearby_line
+            )
+
+            if score is None:
+                continue
+
+            distance = abs(
+                (start + offset)
+                - index
+            )
+
+            candidates.append(
+                (
+                    distance,
+                    score,
+                    nearby
+                )
+            )
+
+    if not candidates:
+        return None
+
+    candidates.sort(
+        key=lambda item: item[0]
+    )
+
+    best_distance = candidates[0][0]
+
+    best = [
+        item
+        for item in candidates
+        if item[0] == best_distance
+    ]
+
+    unique_scores = []
+
+    for _, score, _ in best:
+
+        if score not in unique_scores:
+            unique_scores.append(score)
+
+    if len(unique_scores) != 1:
+        return None
+
+    return {
+        "score": unique_scores[0],
+        "context":
+            " | ".join(
+                best[0][2]
+            )[:300]
+    }
 
 
 def inspect_gamechanger(
@@ -1345,19 +1342,8 @@ def inspect_gamechanger(
         "gc_url"
     )
 
-
     if not url:
-
-        print(
-            "GC SKIP:",
-            game["region"],
-            "Game",
-            game["game_number"],
-            "has no GameChanger URL"
-        )
-
         return None
-
 
     print(
         "GC CHECK:",
@@ -1369,12 +1355,40 @@ def inspect_gamechanger(
         game["team2"]
     )
 
-
     print(
         "  URL:",
         url
     )
 
+    captured_json = []
+
+    def capture_response(response):
+
+        try:
+
+            content_type = (
+                response.headers.get(
+                    "content-type",
+                    ""
+                ).lower()
+            )
+
+            if "json" not in content_type:
+                return
+
+            payload = response.json()
+
+            captured_json.append(
+                payload
+            )
+
+        except Exception:
+            pass
+
+    page.on(
+        "response",
+        capture_response
+    )
 
     try:
 
@@ -1384,11 +1398,9 @@ def inspect_gamechanger(
             timeout=45000
         )
 
-
         page.wait_for_timeout(
-            3500
+            5000
         )
-
 
         body_text = (
             page.locator(
@@ -1396,172 +1408,218 @@ def inspect_gamechanger(
             ).inner_text()
         )
 
-
         if not body_text:
 
             print(
-                "GC SKIP: empty page"
+                "  GC SKIP: empty page"
             )
 
             return None
 
+        # ---------------------------------------------
+        # METHOD 1:
+        # GameChanger JSON / API responses
+        # ---------------------------------------------
 
-        row1 = find_score_in_team_row(
-            page,
-            game["team1"],
-            game["team2"]
+        json_result = inspect_gc_json(
+            captured_json,
+            game
         )
 
+        if json_result:
 
-        row2 = find_score_in_team_row(
-            page,
-            game["team2"],
-            game["team1"]
-        )
+            score1 = json_result[
+                "score1"
+            ]
 
+            score2 = json_result[
+                "score2"
+            ]
 
-        if (
-            not row1
-            or not row2
-        ):
-
-            print(
-                "GC SKIP: could not "
-                "unambiguously pair both "
-                "teams with scores"
-            )
-
-            return None
-
-
-        score1 = row1[
-            "score"
-        ]
-
-
-        score2 = row2[
-            "score"
-        ]
-
-
-        if (
-            not re.fullmatch(
-                r"\d{1,2}",
-                score1
-            )
-            or not re.fullmatch(
-                r"\d{1,2}",
-                score2
-            )
-        ):
-
-            print(
-                "GC SKIP: invalid score"
-            )
-
-            return None
-
-
-        upper = (
-            body_text.upper()
-        )
-
-
-        if "FINAL" in upper:
-
-            status = (
-                "FINAL"
-            )
+            method = "JSON"
 
         else:
 
-            status = (
-                "LIVE"
+            # -----------------------------------------
+            # METHOD 2:
+            # rendered team rows/cards
+            # -----------------------------------------
+
+            row1 = find_score_in_team_row(
+                page,
+                game["team1"],
+                game["team2"]
             )
 
+            row2 = find_score_in_team_row(
+                page,
+                game["team2"],
+                game["team1"]
+            )
+
+            if (
+                row1
+                and row2
+            ):
+
+                score1 = row1[
+                    "score"
+                ]
+
+                score2 = row2[
+                    "score"
+                ]
+
+                method = "DOM"
+
+                print(
+                    "  GC DOM ROW 1:",
+                    row1["rowText"][:250]
+                )
+
+                print(
+                    "  GC DOM ROW 2:",
+                    row2["rowText"][:250]
+                )
+
+            else:
+
+                # -------------------------------------
+                # METHOD 3:
+                # visible text around team names
+                # -------------------------------------
+
+                text1 = score_from_visible_lines(
+                    body_text,
+                    game["team1"]
+                )
+
+                text2 = score_from_visible_lines(
+                    body_text,
+                    game["team2"]
+                )
+
+                if (
+                    not text1
+                    or not text2
+                ):
+
+                    print(
+                        "  GC SKIP: no reliable "
+                        "score pair found by JSON, "
+                        "DOM, or visible-text methods"
+                    )
+
+                    return None
+
+                score1 = text1[
+                    "score"
+                ]
+
+                score2 = text2[
+                    "score"
+                ]
+
+                method = "TEXT"
+
+                print(
+                    "  GC TEXT 1:",
+                    text1["context"]
+                )
+
+                print(
+                    "  GC TEXT 2:",
+                    text2["context"]
+                )
+
+        score1 = valid_score(
+            score1
+        )
+
+        score2 = valid_score(
+            score2
+        )
+
+        if (
+            score1 is None
+            or score2 is None
+        ):
+
+            print(
+                "  GC SKIP: invalid score pair"
+            )
+
+            return None
+
+        upper = body_text.upper()
+
+        if (
+            "FINAL" in upper
+            or "GAME OVER" in upper
+        ):
+            status = "FINAL"
+
+        else:
+            status = "LIVE"
 
         print(
-            "GC RESULT:",
+            "  GC RESULT:",
             game["team1"],
             score1,
             "—",
             game["team2"],
             score2,
-            status
+            status,
+            f"({method})"
         )
-
-
-        print(
-            "  ROW 1:",
-            row1[
-                "rowText"
-            ][:200]
-        )
-
-
-        print(
-            "  ROW 2:",
-            row2[
-                "rowText"
-            ][:200]
-        )
-
 
         return {
-            "score1":
-                score1,
-
-            "score2":
-                score2,
-
-            "status":
-                status
+            "score1": score1,
+            "score2": score2,
+            "status": status,
+            "method": method
         }
-
 
     except Exception as exc:
 
         print(
-            "GC ERROR:",
+            "  GC ERROR:",
             type(exc).__name__,
             exc
         )
 
         return None
 
+    finally:
 
-def should_check_gc(
-    game
-):
+        page.remove_listener(
+            "response",
+            capture_response
+        )
+
+
+def should_check_gc(game):
 
     if not game.get(
         "gc_url"
     ):
-
         return False
-
 
     if game.get(
         "status"
     ) == "FINAL":
-
         return False
-
 
     scheduled = game.get(
         "scheduled_dt"
     )
 
-
     if scheduled is None:
-
         return False
-
 
     now = datetime.now(
         EASTERN
     )
-
 
     start = (
         scheduled
@@ -1571,7 +1629,6 @@ def should_check_gc(
         )
     )
 
-
     end = (
         scheduled
         + timedelta(
@@ -1579,7 +1636,6 @@ def should_check_gc(
                 GC_AFTER_HOURS
         )
     )
-
 
     return (
         start
@@ -1593,21 +1649,16 @@ def apply_gamechanger_live(
 ):
 
     candidates = [
-
         game
-
         for game in scraped
-
         if should_check_gc(
             game
         )
     ]
 
-
     print(
         "\n--- GAMECHANGER LIVE CHECK ---"
     )
-
 
     if not candidates:
 
@@ -1617,28 +1668,20 @@ def apply_gamechanger_live(
 
         return scraped
 
-
     with sync_playwright() as p:
 
-        browser = (
-            p.chromium.launch(
-                headless=True
-            )
+        browser = p.chromium.launch(
+            headless=True
         )
 
-
-        page = (
-            browser.new_page(
-                viewport={
-                    "width":
-                        1280,
-
-                    "height":
-                        1200
-                }
-            )
+        context = browser.new_context(
+            viewport={
+                "width": 1280,
+                "height": 1200
+            }
         )
 
+        page = context.new_page()
 
         for game in candidates:
 
@@ -1647,15 +1690,10 @@ def apply_gamechanger_live(
                 game
             )
 
-
             if not result:
-
                 continue
 
-
-            game[
-                "matchup"
-            ] = (
+            game["matchup"] = (
                 f"{game['team1']} "
                 f"{result['score1']}"
                 f" — "
@@ -1663,18 +1701,11 @@ def apply_gamechanger_live(
                 f"{result['score2']}"
             )
 
-
-            game[
-                "status"
-            ] = (
-                result[
-                    "status"
-                ]
+            game["status"] = (
+                result["status"]
             )
 
-
         browser.close()
-
 
     return scraped
 
@@ -1682,25 +1713,20 @@ def apply_gamechanger_live(
 def add_world_series_base_games():
 
     existing = {
-
         (
             game["date"],
             game["time"],
             game["region"]
         )
-
         for game in BASE
     }
-
 
     for (
         date_iso,
         game_time,
         matchup,
         tv
-
     ) in WORLD_SERIES_GAMES:
-
 
         key = (
             date_iso,
@@ -1708,30 +1734,16 @@ def add_world_series_base_games():
             "World Series"
         )
 
-
         if key in existing:
-
             continue
 
-
         BASE.append({
-            "date":
-                date_iso,
-
-            "time":
-                game_time,
-
-            "region":
-                "World Series",
-
-            "matchup":
-                matchup,
-
-            "tv":
-                tv,
-
-            "status":
-                ""
+            "date": date_iso,
+            "time": game_time,
+            "region": "World Series",
+            "matchup": matchup,
+            "tv": tv,
+            "status": ""
         })
 
 
@@ -1753,11 +1765,9 @@ for region, url in URLS.items():
             )
         )
 
-
         scraped.extend(
             region_games
         )
-
 
         if not region_games:
 
@@ -1766,7 +1776,6 @@ for region, url in URLS.items():
                 f"no games parsed"
             )
 
-
     except Exception as exc:
 
         errors.append(
@@ -1774,7 +1783,6 @@ for region, url in URLS.items():
             f"{type(exc).__name__}: "
             f"{exc}"
         )
-
 
     time.sleep(
         0.15
@@ -1789,14 +1797,11 @@ try:
     (
         world_games,
         participants
-
     ) = parse_world_series_page()
-
 
     scraped.extend(
         world_games
     )
-
 
 except Exception as exc:
 
@@ -1813,20 +1818,17 @@ scraped = apply_gamechanger_live(
 
 
 lookup = {
-
     (
         game["date"],
         game["time"],
         game["region"]
     ):
         game
-
     for game in scraped
 }
 
 
 output = []
-
 matched = 0
 
 
@@ -1836,7 +1838,6 @@ for base_game in BASE:
         base_game
     )
 
-
     official = lookup.get(
         (
             row["date"],
@@ -1845,25 +1846,17 @@ for base_game in BASE:
         )
     )
 
-
     if official:
 
         row["matchup"] = (
-            official[
-                "matchup"
-            ]
+            official["matchup"]
         )
-
 
         row["status"] = (
-            official[
-                "status"
-            ]
+            official["status"]
         )
 
-
         matched += 1
-
 
     output.append(
         row
@@ -1883,7 +1876,6 @@ output.sort(
 
 
 payload = {
-
     "updated":
         datetime.now(
             UTC
@@ -1916,13 +1908,11 @@ payload = {
 (
     ROOT / "latest.json"
 ).write_text(
-
     json.dumps(
         payload,
         indent=2,
         ensure_ascii=False
     ),
-
     encoding="utf-8"
 )
 
@@ -1932,12 +1922,10 @@ print(
     len(scraped)
 )
 
-
 print(
     "Matched games:",
     matched
 )
-
 
 print(
     "\n--- LIVE GAMES WRITTEN ---"
@@ -1945,11 +1933,8 @@ print(
 
 
 live_games = [
-
     game
-
     for game in scraped
-
     if game.get(
         "status"
     ) == "LIVE"
@@ -1975,42 +1960,43 @@ for game in live_games:
 
 
 print(
-    "\n--- MIDWEST TODAY ---"
+    "\n--- TODAY'S GAMECHANGER STATUS ---"
 )
 
 
 for game in scraped:
 
-    if (
-        game["region"]
-        == "Midwest"
-        and game["date"]
-        == "2026-08-10"
-    ):
+    if game["date"] == "2026-08-10":
 
-        print(
-            "Game",
-            game[
-                "game_number"
-            ],
-
-            game[
-                "time"
-            ],
-
-            game[
-                "matchup"
-            ],
-
-            game[
-                "status"
-            ],
-
-            "GC:",
-            game.get(
-                "gc_url"
-            )
+        scheduled = game.get(
+            "scheduled_dt"
         )
+
+        if not scheduled:
+            continue
+
+        if (
+            scheduled
+            - timedelta(
+                minutes=GC_BEFORE_MINUTES
+            )
+            <= datetime.now(EASTERN)
+            <= scheduled
+            + timedelta(
+                hours=GC_AFTER_HOURS
+            )
+        ):
+
+            print(
+                game["region"],
+                "Game",
+                game["game_number"],
+                game["time"],
+                game["matchup"],
+                game["status"],
+                "GC:",
+                game.get("gc_url")
+            )
 
 
 if errors:
@@ -2018,7 +2004,6 @@ if errors:
     print(
         "\nWarnings:"
     )
-
 
     for error in errors:
 
