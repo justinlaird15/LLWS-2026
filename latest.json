@@ -1,8 +1,8 @@
 {
-  "updated": "2026-08-10 01:29 UTC",
+  "updated": "2026-08-10 06:03 UTC",
   "source": "Official LittleLeague.org region and World Series schedules",
-  "scraped_games": 97,
-  "matched_games": 61,
+  "scraped_games": 100,
+  "matched_games": 64,
   "world_series_participants": {
     "Asia-Pacific": "West Seoul (B) LL",
     "Australia": "Ryde Little League",
@@ -116,7 +116,7 @@
       "date": "2026-08-10",
       "time": "1:00 PM",
       "region": "Great Lakes",
-      "matchup": "Elimination Game",
+      "matchup": "Indiana vs Michigan",
       "tv": "ESPN+",
       "status": ""
     },
@@ -140,7 +140,7 @@
       "date": "2026-08-10",
       "time": "3:00 PM",
       "region": "Southwest",
-      "matchup": "Elimination Game",
+      "matchup": "Louisiana vs Texas West",
       "tv": "ESPN",
       "status": ""
     },
@@ -180,7 +180,7 @@
       "date": "2026-08-10",
       "time": "9:00 PM",
       "region": "Mountain",
-      "matchup": "Elimination Game",
+      "matchup": "Montana vs Colorado",
       "tv": "ESPN",
       "status": ""
     },
