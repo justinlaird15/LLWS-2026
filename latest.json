@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-10 15:20 UTC",
+  "updated": "2026-08-10 15:40 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
   "scraped_games": 101,
   "matched_games": 65,
@@ -100,9 +100,9 @@
       "date": "2026-08-10",
       "time": "10:00 AM",
       "region": "Midwest",
-      "matchup": "North Dakota vs Wisconsin",
+      "matchup": "North Dakota 2 — Wisconsin 12",
       "tv": "ESPN+",
-      "status": ""
+      "status": "LIVE"
     },
     {
       "date": "2026-08-10",
