@@ -25,9 +25,6 @@ jobs:
       - name: Install requirements
         run: pip install -r requirements.txt
 
-      - name: Install browser
-        run: python -m playwright install --with-deps chromium
-
       - name: Update LLWS schedule
         run: python update_schedule.py
 
