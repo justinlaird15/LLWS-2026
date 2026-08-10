@@ -2,9 +2,9 @@ name: Update LLWS schedule
 
 on:
   workflow_dispatch:
+
   schedule:
-    - cron: '*/5 12-23 * 8 *'
-    - cron: '*/5 0-4 * 8 *'
+  - cron: '*/5 * * 8 *'
 
 permissions:
   contents: write
