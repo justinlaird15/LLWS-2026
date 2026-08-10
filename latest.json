@@ -1,8 +1,8 @@
 {
-  "updated": "2026-08-10 17:40 UTC",
+  "updated": "2026-08-10 20:07 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
-  "scraped_games": 102,
-  "matched_games": 66,
+  "scraped_games": 103,
+  "matched_games": 67,
   "world_series_participants": {
     "Asia-Pacific": "West Seoul (B) LL",
     "Australia": "Ryde Little League",
@@ -36,7 +36,7 @@
       "date": "2026-08-09",
       "time": "4:00 PM",
       "region": "Southwest",
-      "matchup": "Oklahoma 3 — Louisiana 2",
+      "matchup": "Oklahoma 0 — Louisiana 6",
       "tv": "ESPN",
       "status": "FINAL"
     },
@@ -116,41 +116,41 @@
       "date": "2026-08-10",
       "time": "1:00 PM",
       "region": "Great Lakes",
-      "matchup": "Indiana 8 — Michigan 0",
+      "matchup": "Indiana 11 — Michigan 5",
       "tv": "ESPN+",
-      "status": "LIVE"
+      "status": "FINAL"
     },
     {
       "date": "2026-08-10",
       "time": "1:00 PM",
       "region": "Metro",
-      "matchup": "New York 0 — New Jersey 4",
+      "matchup": "New York 2 — New Jersey 12",
       "tv": "ESPN",
-      "status": "LIVE"
+      "status": "FINAL"
     },
     {
       "date": "2026-08-10",
       "time": "3:00 PM",
       "region": "Northwest",
-      "matchup": "Alaska vs Oregon",
+      "matchup": "Alaska 3 — Oregon 3",
       "tv": "ESPN+",
-      "status": ""
+      "status": "LIVE"
     },
     {
       "date": "2026-08-10",
       "time": "3:00 PM",
       "region": "Southwest",
-      "matchup": "Louisiana vs Texas West",
+      "matchup": "Louisiana 0 — Texas West 4",
       "tv": "ESPN",
-      "status": ""
+      "status": "LIVE"
     },
     {
       "date": "2026-08-10",
       "time": "4:00 PM",
       "region": "Midwest",
-      "matchup": "Minnesota vs South Dakota",
+      "matchup": "Minnesota 0 — South Dakota 0",
       "tv": "ESPN+",
-      "status": ""
+      "status": "LIVE"
     },
     {
       "date": "2026-08-10",
@@ -268,7 +268,7 @@
       "date": "2026-08-12",
       "time": "5:00 PM",
       "region": "Metro",
-      "matchup": "Elimination/Semifinal",
+      "matchup": "Connecticut vs New York",
       "tv": "ESPN",
       "status": ""
     },
