@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-10 23:33 UTC",
+  "updated": "2026-08-10 23:58 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
   "scraped_games": 103,
   "matched_games": 66,
@@ -164,7 +164,7 @@
       "date": "2026-08-10",
       "time": "6:00 PM",
       "region": "West",
-      "matchup": "Northern California 3 — Arizona 3",
+      "matchup": "Northern California 5 — Arizona 7",
       "tv": "ESPN+",
       "status": "LIVE"
     },
@@ -172,7 +172,7 @@
       "date": "2026-08-10",
       "time": "7:00 PM",
       "region": "Great Lakes",
-      "matchup": "Ohio 1 — Kentucky 3",
+      "matchup": "Ohio 10 — Kentucky 3",
       "tv": "ESPN",
       "status": "LIVE"
     },
