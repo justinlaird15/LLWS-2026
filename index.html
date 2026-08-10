@@ -17,9 +17,7 @@ href="manifest.webmanifest">
 <link rel="icon"
 href="icon.svg">
 
-<title>
-2026 LLWS 12U TV Schedule
-</title>
+<title>2026 LLWS 12U TV Schedule</title>
 
 
 <style>
@@ -33,7 +31,9 @@ href="icon.svg">
 --accent:#4ea1ff;
 --espn:#ff5a5f;
 --espn2:#ff9f43;
---plus:#7ed957
+--plus:#7ed957;
+--live:#ff3b30;
+--final:#657080
 }
 
 
@@ -163,6 +163,13 @@ margin:8px 0
 }
 
 
+.game.live-game{
+border-color:#7a2828;
+box-shadow:
+0 0 0 1px rgba(255,59,48,.08);
+}
+
+
 .top{
 display:flex;
 justify-content:space-between;
@@ -190,7 +197,8 @@ margin-top:2px
 
 .badges{
 display:flex;
-gap:6px
+gap:6px;
+align-items:center
 }
 
 
@@ -220,7 +228,34 @@ color:#111
 
 
 .final{
-background:#657080
+background:var(--final)
+}
+
+
+.live{
+background:var(--live);
+color:white;
+animation:pulse 1.4s infinite
+}
+
+
+@keyframes pulse{
+
+0%{
+box-shadow:
+0 0 0 0 rgba(255,59,48,.55)
+}
+
+70%{
+box-shadow:
+0 0 0 7px rgba(255,59,48,0)
+}
+
+100%{
+box-shadow:
+0 0 0 0 rgba(255,59,48,0)
+}
+
 }
 
 
@@ -231,6 +266,13 @@ border-radius:12px;
 padding:10px;
 margin:12px 0;
 color:#d9ecff
+}
+
+
+.live-banner{
+background:#351415;
+border-color:#7a2828;
+color:#ffd9d7
 }
 
 
@@ -308,34 +350,26 @@ Last refreshed: waiting…
 <button
 id="upcoming"
 class="active">
-
 Upcoming
-
 </button>
 
 
 <button
 id="all">
-
 All dates
-
 </button>
 
 
 <button
 id="refresh">
-
 Refresh now
-
 </button>
 
 
 <button
 id="install"
 hidden>
-
 Install app
-
 </button>
 
 </div>
@@ -367,17 +401,23 @@ The page checks
 <b>latest.json</b>
 each time it opens or you tap Refresh.
 
-GitHub Actions rebuilds that file from the official
-LittleLeague.org tournament pages on an hourly August schedule.
+GitHub Actions checks the official LittleLeague.org
+tournament schedules every few minutes.
+
+A red
+<b>LIVE</b>
+badge means Little League is publishing a score for a game
+that is still within its expected live-game window.
+
+A gray
+<b>FINAL</b>
+badge means the scored game is considered complete.
 
 <b>Data updated</b>
-shows when GitHub last rebuilt the schedule.
+shows when GitHub last rebuilt the results.
 
 <b>Last refreshed</b>
-shows when this phone last successfully checked for new data.
-
-Weather, postponements, TV changes, or a Little League
-page-layout change can temporarily affect automatic updates.
+shows when this phone last checked for that newest data.
 
 </div>
 
@@ -457,6 +497,86 @@ timeZone:'America/New_York'
 }
 
 
+function statusBadge(status){
+
+if(
+status === 'LIVE'
+){
+
+return (
+'<span class="badge live">LIVE</span>'
+);
+
+}
+
+
+if(
+status === 'FINAL'
+){
+
+return (
+'<span class="badge final">FINAL</span>'
+);
+
+}
+
+
+return '';
+
+}
+
+
+function timeValue(t){
+
+const parts =
+t.match(
+/(\d+):(\d+)\s+(AM|PM)/i
+);
+
+
+if(!parts){
+return 9999;
+}
+
+
+let hour =
+Number(parts[1]);
+
+
+const minute =
+Number(parts[2]);
+
+
+const ap =
+parts[3].toUpperCase();
+
+
+if(
+ap === 'PM'
+&&
+hour !== 12
+){
+hour += 12;
+}
+
+
+if(
+ap === 'AM'
+&&
+hour === 12
+){
+hour = 0;
+}
+
+
+return (
+hour * 60
++ minute
+);
+
+}
+
+
 function render(){
 
 if(!data){
@@ -506,6 +626,40 @@ groups
 date => {
 
 
+groups[
+date
+].sort(
+(a,b) => {
+
+
+if(
+a.status === 'LIVE'
+&&
+b.status !== 'LIVE'
+){
+return -1;
+}
+
+
+if(
+b.status === 'LIVE'
+&&
+a.status !== 'LIVE'
+){
+return 1;
+}
+
+
+return (
+timeValue(a.time)
+-
+timeValue(b.time)
+);
+
+}
+);
+
+
 const section =
 document.createElement(
 'section'
@@ -522,8 +676,7 @@ section.innerHTML =
 
 groups[
 date
-]
-.forEach(
+].forEach(
 g => {
 
 
@@ -537,6 +690,17 @@ card.className =
 'game';
 
 
+if(
+g.status === 'LIVE'
+){
+
+card.classList.add(
+'live-game'
+);
+
+}
+
+
 card.innerHTML =
 
 `<div class="top">
@@ -547,11 +711,7 @@ ${g.time}
 
 <span class="badges">
 
-${
-g.status
-? '<span class="badge final">FINAL</span>'
-: ''
-}
+${statusBadge(g.status)}
 
 <span class="badge ${tvClass(g.tv)}">
 ${g.tv}
@@ -592,6 +752,37 @@ document.getElementById(
 );
 
 
+const liveGames =
+data.games.filter(
+g =>
+g.status === 'LIVE'
+);
+
+
+if(
+liveGames.length > 0
+){
+
+banner.classList.add(
+'live-banner'
+);
+
+
+banner.textContent =
+liveGames.length === 1
+
+? '🔴 1 game is LIVE right now.'
+
+: `🔴 ${liveGames.length} games are LIVE right now.`;
+
+}
+else{
+
+banner.classList.remove(
+'live-banner'
+);
+
+
 if(
 groups[today]
 ){
@@ -604,6 +795,8 @@ else{
 
 banner.textContent =
 "Next scheduled games are shown below.";
+
+}
 
 }
 
@@ -624,8 +817,13 @@ document.getElementById(
 );
 
 
+banner.classList.remove(
+'live-banner'
+);
+
+
 banner.textContent =
-'Checking latest results…';
+'Checking latest scores…';
 
 
 refreshButton.disabled =
@@ -688,13 +886,6 @@ document.getElementById(
 ).textContent =
 
 'Last refreshed: '
-+ refreshedAt
-+ ' ET';
-
-
-banner.textContent =
-
-'Refresh completed at '
 + refreshedAt
 + ' ET';
 
