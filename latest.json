@@ -1,8 +1,8 @@
 {
-  "updated": "2026-08-10 15:03 UTC",
-  "source": "Official LittleLeague.org region and World Series schedules",
-  "scraped_games": 100,
-  "matched_games": 64,
+  "updated": "2026-08-10 15:20 UTC",
+  "source": "Official LittleLeague.org schedules + GameChanger live scoring",
+  "scraped_games": 101,
+  "matched_games": 65,
   "world_series_participants": {
     "Asia-Pacific": "West Seoul (B) LL",
     "Australia": "Ryde Little League",
@@ -92,9 +92,9 @@
       "date": "2026-08-10",
       "time": "9:00 AM",
       "region": "New England",
-      "matchup": "Vermont vs Massachusetts",
+      "matchup": "Vermont 1 — Massachusetts 11",
       "tv": "ESPN",
-      "status": ""
+      "status": "LIVE"
     },
     {
       "date": "2026-08-10",
@@ -252,7 +252,7 @@
       "date": "2026-08-12",
       "time": "1:00 PM",
       "region": "New England",
-      "matchup": "Elimination/Semifinal",
+      "matchup": "Maine vs Vermont",
       "tv": "ESPN",
       "status": ""
     },
