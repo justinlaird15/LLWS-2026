@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-10 15:40 UTC",
+  "updated": "2026-08-10 15:54 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
   "scraped_games": 101,
   "matched_games": 65,
@@ -94,7 +94,7 @@
       "region": "New England",
       "matchup": "Vermont 1 — Massachusetts 11",
       "tv": "ESPN",
-      "status": "LIVE"
+      "status": "FINAL"
     },
     {
       "date": "2026-08-10",
@@ -102,15 +102,15 @@
       "region": "Midwest",
       "matchup": "North Dakota 2 — Wisconsin 12",
       "tv": "ESPN+",
-      "status": "LIVE"
+      "status": "FINAL"
     },
     {
       "date": "2026-08-10",
       "time": "11:00 AM",
       "region": "Southeast",
-      "matchup": "Florida vs Tennessee",
+      "matchup": "Florida 0 — Tennessee 3",
       "tv": "ESPN",
-      "status": ""
+      "status": "LIVE"
     },
     {
       "date": "2026-08-10",
