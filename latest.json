@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-10 20:07 UTC",
+  "updated": "2026-08-10 22:10 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
   "scraped_games": 103,
   "matched_games": 67,
@@ -116,9 +116,9 @@
       "date": "2026-08-10",
       "time": "1:00 PM",
       "region": "Great Lakes",
-      "matchup": "Indiana 11 — Michigan 5",
+      "matchup": "Indiana vs Michigan",
       "tv": "ESPN+",
-      "status": "FINAL"
+      "status": ""
     },
     {
       "date": "2026-08-10",
@@ -132,41 +132,41 @@
       "date": "2026-08-10",
       "time": "3:00 PM",
       "region": "Northwest",
-      "matchup": "Alaska 3 — Oregon 3",
+      "matchup": "Alaska 3 — Oregon 11",
       "tv": "ESPN+",
-      "status": "LIVE"
+      "status": "FINAL"
     },
     {
       "date": "2026-08-10",
       "time": "3:00 PM",
       "region": "Southwest",
-      "matchup": "Louisiana 0 — Texas West 4",
+      "matchup": "Louisiana 1 — Texas West 4",
       "tv": "ESPN",
-      "status": "LIVE"
+      "status": "FINAL"
     },
     {
       "date": "2026-08-10",
       "time": "4:00 PM",
       "region": "Midwest",
-      "matchup": "Minnesota 0 — South Dakota 0",
+      "matchup": "Minnesota 9 — South Dakota 4",
       "tv": "ESPN+",
-      "status": "LIVE"
+      "status": "FINAL"
     },
     {
       "date": "2026-08-10",
       "time": "5:00 PM",
       "region": "Mid-Atlantic",
-      "matchup": "Maryland vs Delaware",
+      "matchup": "Maryland 4 — Delaware 1",
       "tv": "ESPN",
-      "status": ""
+      "status": "LIVE"
     },
     {
       "date": "2026-08-10",
       "time": "6:00 PM",
       "region": "West",
-      "matchup": "Northern California vs Arizona",
+      "matchup": "Northern California 0 — Arizona 0",
       "tv": "ESPN+",
-      "status": ""
+      "status": "LIVE"
     },
     {
       "date": "2026-08-10",
