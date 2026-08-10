@@ -4,10 +4,14 @@ on:
   workflow_dispatch:
 
   schedule:
-  - cron: '*/5 * * 8 *'
+    - cron: '*/5 * * 8 *'
 
 permissions:
   contents: write
+
+concurrency:
+  group: llws-live-update
+  cancel-in-progress: true
 
 jobs:
   update:
@@ -24,6 +28,9 @@ jobs:
 
       - name: Install requirements
         run: pip install -r requirements.txt
+
+      - name: Install Chromium
+        run: python -m playwright install --with-deps chromium
 
       - name: Update LLWS schedule
         run: python update_schedule.py
