@@ -1,4 +1,4 @@
-name: Update LLWS schedule
+name: Update LLWS schedule LIVE
 
 on:
   workflow_dispatch:
