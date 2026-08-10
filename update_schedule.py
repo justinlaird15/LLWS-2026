@@ -7,7 +7,7 @@ from zoneinfo import ZoneInfo
 
 import requests
 from bs4 import BeautifulSoup
-
+from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parent
 
@@ -1114,7 +1114,417 @@ except Exception as exc:
         f"{exc}"
     )
 
+# ---------------------------------------------------------
+# GAMECHANGER FALLBACK
+# ---------------------------------------------------------
 
+def get_gamechanger_links(url):
+
+    response = requests.get(
+        url,
+        headers=HEADERS,
+        timeout=30
+    )
+
+    response.raise_for_status()
+
+    soup = BeautifulSoup(
+        response.text,
+        "html.parser"
+    )
+
+    links = {}
+
+    current_game = None
+
+
+    for element in soup.descendants:
+
+        if isinstance(element, str):
+
+            text = clean(element)
+
+            match = re.search(
+                r"Game\s+(\d+)",
+                text,
+                re.I
+            )
+
+            if match:
+
+                current_game = int(
+                    match.group(1)
+                )
+
+
+        elif getattr(
+            element,
+            "name",
+            None
+        ) == "a":
+
+            href = element.get(
+                "href",
+                ""
+            )
+
+            if (
+                current_game
+                and
+                "web.gc.com" in href
+            ):
+
+                links[
+                    current_game
+                ] = href
+
+
+    return links
+
+
+def extract_gc_score(
+    page_text,
+    team1,
+    team2
+):
+
+    if (
+        "FINAL"
+        not in page_text.upper()
+    ):
+
+        return None
+
+
+    lines = [
+
+        clean(line)
+
+        for line
+        in page_text.splitlines()
+
+        if clean(line)
+    ]
+
+
+    def find_team_index(
+        team
+    ):
+
+        team_lower = (
+            team.lower()
+        )
+
+        for i, line in enumerate(
+            lines
+        ):
+
+            if (
+                team_lower
+                in line.lower()
+            ):
+
+                return i
+
+        return None
+
+
+    index1 = find_team_index(
+        team1
+    )
+
+    index2 = find_team_index(
+        team2
+    )
+
+
+    if (
+        index1 is None
+        or
+        index2 is None
+    ):
+
+        return None
+
+
+    def score_near(
+        index
+    ):
+
+        start = max(
+            0,
+            index - 4
+        )
+
+        end = min(
+            len(lines),
+            index + 6
+        )
+
+
+        candidates = []
+
+
+        for line in lines[
+            start:end
+        ]:
+
+            if re.fullmatch(
+                r"\d{1,2}",
+                line
+            ):
+
+                candidates.append(
+                    line
+                )
+
+
+        if candidates:
+
+            return candidates[0]
+
+
+        return None
+
+
+    score1 = score_near(
+        index1
+    )
+
+    score2 = score_near(
+        index2
+    )
+
+
+    if (
+        score1 is None
+        or
+        score2 is None
+    ):
+
+        return None
+
+
+    return (
+        score1,
+        score2
+    )
+
+
+def apply_gamechanger_fallback(
+    scraped
+):
+
+    print(
+        "\n--- GAMECHANGER FALLBACK ---"
+    )
+
+
+    game_links = {}
+
+
+    for region, url in URLS.items():
+
+        try:
+
+            game_links[
+                region
+            ] = get_gamechanger_links(
+                url
+            )
+
+        except Exception as exc:
+
+            print(
+                region,
+                "link lookup failed:",
+                exc
+            )
+
+            game_links[
+                region
+            ] = {}
+
+
+    with sync_playwright() as p:
+
+        browser = p.chromium.launch(
+            headless=True
+        )
+
+
+        page = browser.new_page(
+            viewport={
+                "width": 1280,
+                "height": 1000
+            }
+        )
+
+
+        for game in scraped:
+
+            if (
+                game.get(
+                    "status"
+                )
+                == "FINAL"
+            ):
+
+                continue
+
+
+            region = game.get(
+                "region"
+            )
+
+
+            if (
+                region
+                == "World Series"
+            ):
+
+                continue
+
+
+            game_number = (
+                game.get(
+                    "game_number"
+                )
+            )
+
+
+            url = (
+                game_links
+                .get(
+                    region,
+                    {}
+                )
+                .get(
+                    game_number
+                )
+            )
+
+
+            if not url:
+
+                continue
+
+
+            matchup = (
+                game.get(
+                    "matchup",
+                    ""
+                )
+            )
+
+
+            if (
+                " vs "
+                not in matchup
+            ):
+
+                continue
+
+
+            team1, team2 = (
+
+                part.strip()
+
+                for part
+                in matchup.split(
+                    " vs ",
+                    1
+                )
+            )
+
+
+            try:
+
+                print(
+                    "Checking GC:",
+                    region,
+                    game_number,
+                    team1,
+                    "vs",
+                    team2
+                )
+
+
+                page.goto(
+                    url,
+                    wait_until="domcontentloaded",
+                    timeout=45000
+                )
+
+
+                page.wait_for_timeout(
+                    3500
+                )
+
+
+                body_text = (
+                    page.locator(
+                        "body"
+                    ).inner_text()
+                )
+
+
+                result = extract_gc_score(
+                    body_text,
+                    team1,
+                    team2
+                )
+
+
+                if result:
+
+                    score1, score2 = result
+
+
+                    game[
+                        "matchup"
+                    ] = (
+
+                        f"{team1} "
+                        f"{score1}"
+                        f" — "
+                        f"{team2} "
+                        f"{score2}"
+                    )
+
+
+                    game[
+                        "status"
+                    ] = "FINAL"
+
+
+                    print(
+                        "GC FINAL:",
+                        game[
+                            "matchup"
+                        ]
+                    )
+
+
+            except Exception as exc:
+
+                print(
+                    "GC check failed:",
+                    region,
+                    game_number,
+                    exc
+                )
+
+
+        browser.close()
+
+
+    return scraped
+
+
+scraped = apply_gamechanger_fallback(
+    scraped
+    )
 lookup = {
 
     (
