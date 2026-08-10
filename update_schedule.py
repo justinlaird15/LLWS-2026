@@ -57,7 +57,7 @@ WORLD_SERIES_URL = (
 HEADERS = {
     "User-Agent":
         "Mozilla/5.0 "
-        "(compatible; personal LLWS schedule dashboard/4.0)"
+        "(compatible; personal LLWS schedule dashboard/5.0)"
 }
 
 
@@ -237,6 +237,7 @@ WORLD_SERIES_GAMES = [
 
 
 def clean(value):
+
     return re.sub(
         r"\s+",
         " ",
@@ -314,6 +315,7 @@ def page_timezone(tokens):
     )
 
     if match:
+
         return TZ_MAP[
             match.group(1).title()
         ]
@@ -341,6 +343,7 @@ def find_date_and_time(
     )
 
     if not match:
+
         return None, None
 
     time_text = (
@@ -431,28 +434,92 @@ def extract_region_teams(
     )
 
 
-def score_after_team(
+def score_for_team(
     block_tokens,
-    raw_team
+    raw_team,
+    other_raw_team
 ):
+
+    """
+    Find a score belonging to one specific team.
+
+    Little League frequently formats an advancing team as:
+
+        Ohio
+        W1
+        11
+
+    or:
+
+        Vermont
+        L4
+        6
+
+    Therefore W/L bracket references must be ignored rather
+    than treated as the end of the score search.
+    """
 
     try:
 
-        index = (
-            block_tokens.index(
-                raw_team
-            )
+        start = block_tokens.index(
+            raw_team
         )
 
     except ValueError:
 
         return None
 
-    for token in block_tokens[
-        index + 1:
-        index + 5
-    ]:
 
+    try:
+
+        end = block_tokens.index(
+            other_raw_team,
+            start + 1
+        )
+
+    except ValueError:
+
+        end = min(
+            len(block_tokens),
+            start + 10
+        )
+
+
+    segment = block_tokens[
+        start + 1:
+        end
+    ]
+
+
+    for token in segment:
+
+        # Ignore bracket advancement references.
+        if re.fullmatch(
+            r"[WL]\d+",
+            token,
+            re.I
+        ):
+
+            continue
+
+
+        # Ignore team abbreviations and UI text.
+        if token in {
+            "FINAL",
+            "Final",
+            "Watch",
+            "Box Score",
+            "ESPN",
+            "ESPN2",
+            "ESPN+",
+            "ABC",
+        }:
+
+            continue
+
+
+        # A plain one- or two-digit value inside this team's
+        # segment is the score.
         if re.fullmatch(
             r"\d{1,2}",
             token
@@ -460,14 +527,39 @@ def score_after_team(
 
             return token
 
-        if re.fullmatch(
-            r"[WL]\d+",
-            token
-        ):
-
-            return None
 
     return None
+
+
+def game_is_final(
+    block_tokens,
+    score1,
+    score2
+):
+
+    if (
+        score1 is None
+        or score2 is None
+    ):
+
+        return False
+
+
+    text = " ".join(
+        block_tokens
+    ).upper()
+
+
+    # Some rendered versions explicitly contain FINAL.
+    if "FINAL" in text:
+
+        return True
+
+
+    # Little League's static tournament schedule normally
+    # publishes numeric game scores after completion.
+    # Existing working games use this format.
+    return True
 
 
 def parse_region_page(
@@ -487,6 +579,7 @@ def parse_region_page(
 
     games = []
 
+
     for block in (
         split_into_game_blocks(
             tokens
@@ -502,6 +595,7 @@ def parse_region_page(
             source_timezone
         )
 
+
         (
             teams,
             raw_teams
@@ -509,6 +603,7 @@ def parse_region_page(
         ) = extract_region_teams(
             block["tokens"]
         )
+
 
         if (
             not date_iso
@@ -519,19 +614,25 @@ def parse_region_page(
 
             continue
 
-        score1 = score_after_team(
-            block["tokens"],
-            raw_teams[0]
-        )
 
-        score2 = score_after_team(
+        score1 = score_for_team(
             block["tokens"],
+            raw_teams[0],
             raw_teams[1]
         )
 
-        if (
-            score1 is not None
-            and score2 is not None
+
+        score2 = score_for_team(
+            block["tokens"],
+            raw_teams[1],
+            "__END_OF_GAME__"
+        )
+
+
+        if game_is_final(
+            block["tokens"],
+            score1,
+            score2
         ):
 
             matchup = (
@@ -552,6 +653,7 @@ def parse_region_page(
 
             status = ""
 
+
         games.append({
             "date":
                 date_iso,
@@ -571,6 +673,7 @@ def parse_region_page(
             "game_number":
                 block["game_number"]
         })
+
 
     return games
 
@@ -593,7 +696,9 @@ def participant_map_from_tokens(
 
         prefix = tokens
 
+
     mapping = {}
+
 
     for region in (
         PARTICIPANT_REGIONS
@@ -611,6 +716,7 @@ def participant_map_from_tokens(
 
             continue
 
+
         if (
             index + 1
             >= len(prefix)
@@ -618,9 +724,11 @@ def participant_map_from_tokens(
 
             continue
 
+
         team = prefix[
             index + 1
         ]
+
 
         if team not in {
             "TBA",
@@ -633,6 +741,7 @@ def participant_map_from_tokens(
             mapping[
                 region
             ] = team
+
 
     return mapping
 
@@ -659,6 +768,7 @@ def world_side_candidates(
 
     sides = []
 
+
     for token in block_tokens:
 
         normalized = (
@@ -666,6 +776,7 @@ def world_side_candidates(
                 token
             )
         )
+
 
         if (
             normalized
@@ -678,6 +789,7 @@ def world_side_candidates(
                     normalized
                 )
 
+
         elif re.fullmatch(
             r"[WL]\d+",
             token
@@ -688,6 +800,7 @@ def world_side_candidates(
                 sides.append(
                     token
                 )
+
 
     return sides[:2]
 
@@ -703,9 +816,11 @@ def display_world_side(
 
         return side
 
+
     region = side[
         :-7
     ]
+
 
     if (
         region
@@ -722,9 +837,11 @@ def display_world_side(
             region
         )
 
+
     team = participants.get(
         participant_key
     )
+
 
     if team:
 
@@ -732,6 +849,7 @@ def display_world_side(
             f"{team} "
             f"({region})"
         )
+
 
     return side
 
@@ -742,13 +860,16 @@ def parse_world_series_page():
         WORLD_SERIES_URL
     )
 
+
     participants = (
         participant_map_from_tokens(
             tokens
         )
     )
 
+
     games = []
+
 
     for block in (
         split_into_game_blocks(
@@ -763,6 +884,7 @@ def parse_world_series_page():
 
             continue
 
+
         (
             date_iso,
             game_time
@@ -772,11 +894,13 @@ def parse_world_series_page():
             "America/New_York"
         )
 
+
         sides = (
             world_side_candidates(
                 block["tokens"]
             )
         )
+
 
         if (
             not date_iso
@@ -785,6 +909,7 @@ def parse_world_series_page():
         ):
 
             continue
+
 
         display_sides = [
 
@@ -795,6 +920,7 @@ def parse_world_series_page():
 
             for side in sides
         ]
+
 
         games.append({
             "date":
@@ -820,6 +946,7 @@ def parse_world_series_page():
                 block["game_number"]
         })
 
+
     return (
         games,
         participants
@@ -839,6 +966,7 @@ def add_world_series_base_games():
         for game in BASE
     }
 
+
     for (
         date_iso,
         game_time,
@@ -847,14 +975,18 @@ def add_world_series_base_games():
 
     ) in WORLD_SERIES_GAMES:
 
+
         key = (
             date_iso,
             game_time,
             "World Series"
         )
 
+
         if key in existing:
+
             continue
+
 
         BASE.append({
             "date":
@@ -897,9 +1029,11 @@ for region, url in (
             )
         )
 
+
         scraped.extend(
             region_games
         )
+
 
         if not region_games:
 
@@ -908,6 +1042,7 @@ for region, url in (
                 f"no games parsed"
             )
 
+
     except Exception as exc:
 
         errors.append(
@@ -915,6 +1050,7 @@ for region, url in (
             f"{type(exc).__name__}: "
             f"{exc}"
         )
+
 
     time.sleep(
         0.15
@@ -932,9 +1068,11 @@ try:
 
     ) = parse_world_series_page()
 
+
     scraped.extend(
         world_games
     )
+
 
     if not world_games:
 
@@ -942,6 +1080,7 @@ try:
             "World Series: "
             "no games parsed"
         )
+
 
 except Exception as exc:
 
@@ -966,6 +1105,7 @@ lookup = {
 
 
 output = []
+
 matched = 0
 
 
@@ -975,6 +1115,7 @@ for base_game in BASE:
         base_game
     )
 
+
     official = lookup.get(
         (
             row["date"],
@@ -982,6 +1123,7 @@ for base_game in BASE:
             row["region"]
         )
     )
+
 
     if official:
 
@@ -994,6 +1136,7 @@ for base_game in BASE:
         )
 
         matched += 1
+
 
     output.append(
         row
@@ -1012,6 +1155,7 @@ output.sort(
 
 
 payload = {
+
     "updated":
         datetime.now(
             ZoneInfo("UTC")
@@ -1043,11 +1187,13 @@ payload = {
 (
     ROOT / "latest.json"
 ).write_text(
+
     json.dumps(
         payload,
         indent=2,
         ensure_ascii=False
     ),
+
     encoding="utf-8"
 )
 
@@ -1057,14 +1203,57 @@ print(
     len(scraped)
 )
 
+
 print(
     "Matched games:",
     matched
 )
 
+
+print(
+    "\n--- GREAT LAKES RESULTS ---"
+)
+
+
+for game in scraped:
+
+    if (
+        game["region"]
+        == "Great Lakes"
+    ):
+
+        print(
+            game["date"],
+            game["time"],
+            game["matchup"],
+            game["status"]
+        )
+
+
+print(
+    "\n--- SOUTHWEST RESULTS ---"
+)
+
+
+for game in scraped:
+
+    if (
+        game["region"]
+        == "Southwest"
+    ):
+
+        print(
+            game["date"],
+            game["time"],
+            game["matchup"],
+            game["status"]
+        )
+
+
 print(
     "\n--- WEST RESULTS ---"
 )
+
 
 for game in scraped:
 
@@ -1080,9 +1269,11 @@ for game in scraped:
             game["status"]
         )
 
+
 print(
     "\n--- MID-ATLANTIC RESULTS ---"
 )
+
 
 for game in scraped:
 
@@ -1098,6 +1289,7 @@ for game in scraped:
             game["status"]
         )
 
+
 if errors:
 
     print(
@@ -1109,4 +1301,4 @@ if errors:
         print(
             " -",
             error
-    )
+)
