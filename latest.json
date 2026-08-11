@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-11 18:05 UTC",
+  "updated": "2026-08-11 20:22 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
-  "scraped_games": 104,
+  "scraped_games": 105,
   "matched_games": 66,
   "world_series_participants": {
     "Asia-Pacific": "West Seoul (B) LL",
@@ -204,15 +204,15 @@
       "date": "2026-08-11",
       "time": "1:00 PM",
       "region": "Mountain",
-      "matchup": "Nevada 2 — Utah 3",
+      "matchup": "Nevada 4 — Utah 3",
       "tv": "ESPN+",
-      "status": "LIVE"
+      "status": "FINAL"
     },
     {
       "date": "2026-08-11",
       "time": "3:00 PM",
       "region": "Southeast",
-      "matchup": "Alabama vs Tennessee",
+      "matchup": "🏆 Southeast Championship",
       "tv": "ESPN",
       "status": ""
     },
@@ -308,7 +308,7 @@
       "date": "2026-08-13",
       "time": "5:00 PM",
       "region": "Mountain",
-      "matchup": "Elimination/Semifinal",
+      "matchup": "Montana vs Utah",
       "tv": "ESPN",
       "status": ""
     },
