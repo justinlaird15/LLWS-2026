@@ -1,9 +1,10 @@
 {
-  "updated": "2026-08-11 23:21 UTC",
+  "updated": "2026-08-12 05:19 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
-  "scraped_games": 105,
-  "matched_games": 66,
+  "scraped_games": 109,
+  "matched_games": 69,
   "world_series_participants": {
+    "Southeast": "Phenix City Youth Baseball LL",
     "Asia-Pacific": "West Seoul (B) LL",
     "Australia": "Ryde Little League",
     "Caribbean": "Los Nacionales LL",
@@ -236,9 +237,9 @@
       "date": "2026-08-11",
       "time": "9:30 PM",
       "region": "West",
-      "matchup": "Southern California vs Hawaii",
+      "matchup": "Southern California 6 — Hawaii 0",
       "tv": "ESPN",
-      "status": ""
+      "status": "FINAL"
     },
     {
       "date": "2026-08-12",
@@ -260,7 +261,7 @@
       "date": "2026-08-12",
       "time": "3:00 PM",
       "region": "Northwest",
-      "matchup": "Elimination/Semifinal",
+      "matchup": "Oregon vs Washington",
       "tv": "ESPN",
       "status": ""
     },
@@ -276,7 +277,7 @@
       "date": "2026-08-12",
       "time": "7:00 PM",
       "region": "Great Lakes",
-      "matchup": "🏆 Great Lakes Championship",
+      "matchup": "Ohio vs Kentucky",
       "tv": "ESPN",
       "status": ""
     },
@@ -284,7 +285,7 @@
       "date": "2026-08-12",
       "time": "9:00 PM",
       "region": "West",
-      "matchup": "Elimination/Semifinal",
+      "matchup": "Arizona vs Hawaii",
       "tv": "ESPN2",
       "status": ""
     },
@@ -380,7 +381,7 @@
       "date": "2026-08-19",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "Southeast Region vs Northwest Region",
+      "matchup": "Phenix City Youth Baseball LL (Southeast) vs Northwest Region",
       "tv": "ESPN",
       "status": ""
     },
