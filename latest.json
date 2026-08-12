@@ -1,8 +1,8 @@
 {
-  "updated": "2026-08-12 15:31 UTC",
+  "updated": "2026-08-12 18:38 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
-  "scraped_games": 109,
-  "matched_games": 69,
+  "scraped_games": 108,
+  "matched_games": 68,
   "world_series_participants": {
     "Southeast": "Phenix City Youth Baseball LL",
     "Asia-Pacific": "West Seoul (B) LL",
@@ -245,17 +245,17 @@
       "date": "2026-08-12",
       "time": "11:00 AM",
       "region": "Midwest",
-      "matchup": "Iowa 0 — Missouri 1",
+      "matchup": "Iowa vs Missouri",
       "tv": "ESPN",
-      "status": "LIVE"
+      "status": ""
     },
     {
       "date": "2026-08-12",
       "time": "1:00 PM",
       "region": "New England",
-      "matchup": "Maine vs Vermont",
+      "matchup": "Maine 10 — Vermont 0",
       "tv": "ESPN",
-      "status": ""
+      "status": "FINAL"
     },
     {
       "date": "2026-08-12",
