@@ -1,8 +1,8 @@
 {
-  "updated": "2026-08-12 21:25 UTC",
+  "updated": "2026-08-12 23:25 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
-  "scraped_games": 111,
-  "matched_games": 70,
+  "scraped_games": 113,
+  "matched_games": 72,
   "world_series_participants": {
     "Southeast": "Phenix City Youth Baseball LL",
     "Asia-Pacific": "West Seoul (B) LL",
@@ -270,17 +270,17 @@
       "date": "2026-08-12",
       "time": "5:00 PM",
       "region": "Metro",
-      "matchup": "Connecticut 1 — New York 0",
+      "matchup": "Connecticut 8 — New York 4",
       "tv": "ESPN",
-      "status": "LIVE"
+      "status": "FINAL"
     },
     {
       "date": "2026-08-12",
       "time": "7:00 PM",
       "region": "Great Lakes",
-      "matchup": "Ohio vs Kentucky",
+      "matchup": "Ohio 2 — Kentucky 0",
       "tv": "ESPN",
-      "status": ""
+      "status": "LIVE"
     },
     {
       "date": "2026-08-12",
@@ -294,7 +294,7 @@
       "date": "2026-08-13",
       "time": "1:00 PM",
       "region": "Midwest",
-      "matchup": "Semifinal",
+      "matchup": "Wisconsin vs Missouri",
       "tv": "ESPN",
       "status": ""
     },
@@ -358,7 +358,7 @@
       "date": "2026-08-14",
       "time": "7:00 PM",
       "region": "Metro",
-      "matchup": "🏆 Metro Championship",
+      "matchup": "New Jersey vs Connecticut",
       "tv": "ESPN",
       "status": ""
     },
