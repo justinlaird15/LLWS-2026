@@ -1,12 +1,13 @@
 {
-  "updated": "2026-08-12 18:38 UTC",
+  "updated": "2026-08-12 21:25 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
-  "scraped_games": 108,
-  "matched_games": 68,
+  "scraped_games": 111,
+  "matched_games": 70,
   "world_series_participants": {
     "Southeast": "Phenix City Youth Baseball LL",
     "Asia-Pacific": "West Seoul (B) LL",
     "Australia": "Ryde Little League",
+    "Canada": "Little Mountain LL",
     "Caribbean": "Los Nacionales LL",
     "Curaçao": "Pariba LL",
     "Europe & Africa": "South Czech Republic LL",
@@ -261,17 +262,17 @@
       "date": "2026-08-12",
       "time": "3:00 PM",
       "region": "Northwest",
-      "matchup": "Oregon vs Washington",
+      "matchup": "Oregon 2 — Washington 8",
       "tv": "ESPN",
-      "status": ""
+      "status": "FINAL"
     },
     {
       "date": "2026-08-12",
       "time": "5:00 PM",
       "region": "Metro",
-      "matchup": "Connecticut vs New York",
+      "matchup": "Connecticut 1 — New York 0",
       "tv": "ESPN",
-      "status": ""
+      "status": "LIVE"
     },
     {
       "date": "2026-08-12",
@@ -317,7 +318,7 @@
       "date": "2026-08-13",
       "time": "7:00 PM",
       "region": "New England",
-      "matchup": "🏆 New England Championship",
+      "matchup": "Maine vs Massachusetts",
       "tv": "ESPN",
       "status": ""
     },
@@ -325,7 +326,7 @@
       "date": "2026-08-13",
       "time": "9:00 PM",
       "region": "Northwest",
-      "matchup": "🏆 Northwest Championship",
+      "matchup": "Idaho vs Washington",
       "tv": "ESPN",
       "status": ""
     },
@@ -389,7 +390,7 @@
       "date": "2026-08-19",
       "time": "5:00 PM",
       "region": "World Series",
-      "matchup": "Canada Region vs West Seoul (B) LL (Asia-Pacific)",
+      "matchup": "Little Mountain LL (Canada) vs West Seoul (B) LL (Asia-Pacific)",
       "tv": "ESPN",
       "status": ""
     },
