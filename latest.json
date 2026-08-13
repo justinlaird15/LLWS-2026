@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-13 21:27 UTC",
+  "updated": "2026-08-13 23:27 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
   "scraped_games": 116,
   "matched_games": 75,
@@ -312,7 +312,7 @@
       "date": "2026-08-13",
       "time": "5:00 PM",
       "region": "Mountain",
-      "matchup": "Montana 0 — Utah 0",
+      "matchup": "Montana 12 — Utah 4",
       "tv": "ESPN",
       "status": "LIVE"
     },
@@ -320,9 +320,9 @@
       "date": "2026-08-13",
       "time": "7:00 PM",
       "region": "New England",
-      "matchup": "Maine vs Massachusetts",
+      "matchup": "Maine 0 — Massachusetts 1",
       "tv": "ESPN",
-      "status": ""
+      "status": "LIVE"
     },
     {
       "date": "2026-08-13",
