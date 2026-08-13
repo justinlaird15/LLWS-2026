@@ -1,10 +1,12 @@
 {
-  "updated": "2026-08-12 23:25 UTC",
+  "updated": "2026-08-13 05:24 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
-  "scraped_games": 113,
-  "matched_games": 72,
+  "scraped_games": 114,
+  "matched_games": 73,
   "world_series_participants": {
+    "Great Lakes": "West Side LL",
     "Southeast": "Phenix City Youth Baseball LL",
+    "Southwest": "Boerne LL",
     "Asia-Pacific": "West Seoul (B) LL",
     "Australia": "Ryde Little League",
     "Canada": "Little Mountain LL",
@@ -278,17 +280,17 @@
       "date": "2026-08-12",
       "time": "7:00 PM",
       "region": "Great Lakes",
-      "matchup": "Ohio 2 — Kentucky 0",
+      "matchup": "Ohio 6 — Kentucky 0",
       "tv": "ESPN",
-      "status": "LIVE"
+      "status": "FINAL"
     },
     {
       "date": "2026-08-12",
       "time": "9:00 PM",
       "region": "West",
-      "matchup": "Arizona vs Hawaii",
+      "matchup": "Arizona 2 — Hawaii 5",
       "tv": "ESPN2",
-      "status": ""
+      "status": "FINAL"
     },
     {
       "date": "2026-08-13",
@@ -366,7 +368,7 @@
       "date": "2026-08-14",
       "time": "9:00 PM",
       "region": "West",
-      "matchup": "🏆 West Championship",
+      "matchup": "Southern California vs Hawaii",
       "tv": "ESPN",
       "status": ""
     },
@@ -414,7 +416,7 @@
       "date": "2026-08-20",
       "time": "2:00 PM",
       "region": "World Series",
-      "matchup": "Great Lakes Region vs Mountain Region",
+      "matchup": "West Side LL (Great Lakes) vs Mountain Region",
       "tv": "ESPN",
       "status": ""
     },
@@ -446,7 +448,7 @@
       "date": "2026-08-21",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "Southwest Region vs W2",
+      "matchup": "Boerne LL (Southwest) vs W2",
       "tv": "ESPN",
       "status": ""
     },
