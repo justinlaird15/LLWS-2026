@@ -1,10 +1,12 @@
 {
-  "updated": "2026-08-13 23:27 UTC",
+  "updated": "2026-08-14 05:20 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
-  "scraped_games": 116,
-  "matched_games": 75,
+  "scraped_games": 117,
+  "matched_games": 76,
   "world_series_participants": {
     "Great Lakes": "West Side LL",
+    "New England": "Bridgewater Joe Lazaro LL",
+    "Northwest": "Soundview LL",
     "Southeast": "Phenix City Youth Baseball LL",
     "Southwest": "Boerne LL",
     "Asia-Pacific": "West Seoul (B) LL",
@@ -314,23 +316,23 @@
       "region": "Mountain",
       "matchup": "Montana 12 — Utah 4",
       "tv": "ESPN",
-      "status": "LIVE"
+      "status": "FINAL"
     },
     {
       "date": "2026-08-13",
       "time": "7:00 PM",
       "region": "New England",
-      "matchup": "Maine 0 — Massachusetts 1",
+      "matchup": "Maine 0 — Massachusetts 8",
       "tv": "ESPN",
-      "status": "LIVE"
+      "status": "FINAL"
     },
     {
       "date": "2026-08-13",
       "time": "9:00 PM",
       "region": "Northwest",
-      "matchup": "Idaho vs Washington",
+      "matchup": "Idaho 5 — Washington 8",
       "tv": "ESPN",
-      "status": ""
+      "status": "FINAL"
     },
     {
       "date": "2026-08-14",
@@ -352,7 +354,7 @@
       "date": "2026-08-14",
       "time": "5:00 PM",
       "region": "Mountain",
-      "matchup": "🏆 Mountain Championship",
+      "matchup": "Nevada vs Montana",
       "tv": "ESPN",
       "status": ""
     },
@@ -384,7 +386,7 @@
       "date": "2026-08-19",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "Phenix City Youth Baseball LL (Southeast) vs Northwest Region",
+      "matchup": "Phenix City Youth Baseball LL (Southeast) vs Soundview LL (Northwest)",
       "tv": "ESPN",
       "status": ""
     },
@@ -400,7 +402,7 @@
       "date": "2026-08-19",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "Metro Region vs New England Region",
+      "matchup": "Metro Region vs Bridgewater Joe Lazaro LL (New England)",
       "tv": "ESPN",
       "status": ""
     },
