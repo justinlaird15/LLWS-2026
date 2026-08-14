@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-14 22:53 UTC",
+  "updated": "2026-08-14 23:45 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -7,6 +7,7 @@
     "Great Lakes": "West Side LL",
     "Mid-Atlantic": "East Side LL",
     "Midwest": "Davenport Northwest LL",
+    "Mountain": "Paseo Verde LL",
     "New England": "Bridgewater Joe Lazaro LL",
     "Northwest": "Soundview LL",
     "Southeast": "Phenix City Youth Baseball LL",
@@ -356,17 +357,17 @@
       "date": "2026-08-14",
       "time": "5:00 PM",
       "region": "Mountain",
-      "matchup": "Nevada 9 — Montana 0",
+      "matchup": "Nevada 9 — Montana 2",
       "tv": "ESPN",
-      "status": "LIVE"
+      "status": "FINAL"
     },
     {
       "date": "2026-08-14",
       "time": "7:00 PM",
       "region": "Metro",
-      "matchup": "New Jersey vs Connecticut",
+      "matchup": "New Jersey 2 — Connecticut 4",
       "tv": "ESPN",
-      "status": ""
+      "status": "LIVE"
     },
     {
       "date": "2026-08-14",
@@ -420,7 +421,7 @@
       "date": "2026-08-20",
       "time": "2:00 PM",
       "region": "World Series",
-      "matchup": "West Side LL (Great Lakes) vs Mountain Region",
+      "matchup": "West Side LL (Great Lakes) vs Paseo Verde LL (Mountain)",
       "tv": "ESPN",
       "status": ""
     },
