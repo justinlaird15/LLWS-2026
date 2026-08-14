@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-14 21:02 UTC",
+  "updated": "2026-08-14 21:54 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -356,7 +356,7 @@
       "date": "2026-08-14",
       "time": "5:00 PM",
       "region": "Mountain",
-      "matchup": "Nevada 0 — Montana 0",
+      "matchup": "Nevada 2 — Montana 0",
       "tv": "ESPN",
       "status": "LIVE"
     },
