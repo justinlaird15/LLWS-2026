@@ -1,10 +1,11 @@
 {
-  "updated": "2026-08-14 18:09 UTC",
+  "updated": "2026-08-14 20:03 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
   "world_series_participants": {
     "Great Lakes": "West Side LL",
+    "Midwest": "Davenport Northwest LL",
     "New England": "Bridgewater Joe Lazaro LL",
     "Northwest": "Soundview LL",
     "Southeast": "Phenix City Youth Baseball LL",
@@ -338,17 +339,17 @@
       "date": "2026-08-14",
       "time": "1:00 PM",
       "region": "Midwest",
-      "matchup": "Iowa 2 — Wisconsin 1",
+      "matchup": "Iowa 7 — Wisconsin 6",
       "tv": "ESPN",
-      "status": "LIVE"
+      "status": "FINAL"
     },
     {
       "date": "2026-08-14",
       "time": "3:00 PM",
       "region": "Mid-Atlantic",
-      "matchup": "Pennsylvania vs Delaware",
+      "matchup": "Pennsylvania 3 — Delaware 1",
       "tv": "ESPN",
-      "status": ""
+      "status": "LIVE"
     },
     {
       "date": "2026-08-14",
@@ -434,7 +435,7 @@
       "date": "2026-08-20",
       "time": "6:00 PM",
       "region": "World Series",
-      "matchup": "West Region vs Midwest Region",
+      "matchup": "West Region vs Davenport Northwest LL (Midwest)",
       "tv": "ESPN2",
       "status": ""
     },
