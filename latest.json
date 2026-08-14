@@ -1,10 +1,11 @@
 {
-  "updated": "2026-08-14 20:03 UTC",
+  "updated": "2026-08-14 21:02 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
   "world_series_participants": {
     "Great Lakes": "West Side LL",
+    "Mid-Atlantic": "East Side LL",
     "Midwest": "Davenport Northwest LL",
     "New England": "Bridgewater Joe Lazaro LL",
     "Northwest": "Soundview LL",
@@ -349,15 +350,15 @@
       "region": "Mid-Atlantic",
       "matchup": "Pennsylvania 3 — Delaware 1",
       "tv": "ESPN",
-      "status": "LIVE"
+      "status": "FINAL"
     },
     {
       "date": "2026-08-14",
       "time": "5:00 PM",
       "region": "Mountain",
-      "matchup": "Nevada vs Montana",
+      "matchup": "Nevada 0 — Montana 0",
       "tv": "ESPN",
-      "status": ""
+      "status": "LIVE"
     },
     {
       "date": "2026-08-14",
@@ -467,7 +468,7 @@
       "date": "2026-08-21",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "Mid-Atlantic Region vs W4",
+      "matchup": "East Side LL (Mid-Atlantic) vs W4",
       "tv": "ESPN",
       "status": ""
     },
