@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-15 02:41 UTC",
+  "updated": "2026-08-15 04:07 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -13,6 +13,7 @@
     "Northwest": "Soundview LL",
     "Southeast": "Phenix City Youth Baseball LL",
     "Southwest": "Boerne LL",
+    "West": "Sweetwater Valley LL",
     "Asia-Pacific": "West Seoul (B) LL",
     "Australia": "Ryde Little League",
     "Canada": "Little Mountain LL",
@@ -374,9 +375,9 @@
       "date": "2026-08-14",
       "time": "9:00 PM",
       "region": "West",
-      "matchup": "Southern California 5 — Hawaii 0",
+      "matchup": "Southern California 11 — Hawaii 3",
       "tv": "ESPN",
-      "status": "LIVE"
+      "status": "FINAL"
     },
     {
       "date": "2026-08-19",
@@ -438,7 +439,7 @@
       "date": "2026-08-20",
       "time": "6:00 PM",
       "region": "World Series",
-      "matchup": "West Region vs Davenport Northwest LL (Midwest)",
+      "matchup": "Sweetwater Valley LL (West) vs Davenport Northwest LL (Midwest)",
       "tv": "ESPN2",
       "status": ""
     },
