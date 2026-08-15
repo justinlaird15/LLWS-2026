@@ -1,8 +1,8 @@
 {
-  "updated": "2026-08-15 19:45 UTC",
+  "updated": "2026-08-15 20:01 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
-  "scraped_games": 116,
-  "matched_games": 75,
+  "scraped_games": 117,
+  "matched_games": 76,
   "world_series_participants": {
     "Great Lakes": "West Side LL",
     "Metro": "Bayonne Central LL",
@@ -447,7 +447,7 @@
       "date": "2026-08-21",
       "time": "1:00 PM",
       "region": "World Series",
-      "matchup": "Panama Region vs W1",
+      "matchup": "David Doleguita LL (Panama) vs W1",
       "tv": "ESPN",
       "status": ""
     },
