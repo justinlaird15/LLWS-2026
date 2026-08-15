@@ -1,10 +1,11 @@
 {
-  "updated": "2026-08-14 23:45 UTC",
+  "updated": "2026-08-15 02:41 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
   "world_series_participants": {
     "Great Lakes": "West Side LL",
+    "Metro": "Bayonne Central LL",
     "Mid-Atlantic": "East Side LL",
     "Midwest": "Davenport Northwest LL",
     "Mountain": "Paseo Verde LL",
@@ -365,17 +366,17 @@
       "date": "2026-08-14",
       "time": "7:00 PM",
       "region": "Metro",
-      "matchup": "New Jersey 2 — Connecticut 4",
+      "matchup": "New Jersey 8 — Connecticut 6",
       "tv": "ESPN",
-      "status": "LIVE"
+      "status": "FINAL"
     },
     {
       "date": "2026-08-14",
       "time": "9:00 PM",
       "region": "West",
-      "matchup": "Southern California vs Hawaii",
+      "matchup": "Southern California 5 — Hawaii 0",
       "tv": "ESPN",
-      "status": ""
+      "status": "LIVE"
     },
     {
       "date": "2026-08-19",
@@ -405,7 +406,7 @@
       "date": "2026-08-19",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "Metro Region vs Bridgewater Joe Lazaro LL (New England)",
+      "matchup": "Bayonne Central LL (Metro) vs Bridgewater Joe Lazaro LL (New England)",
       "tv": "ESPN",
       "status": ""
     },
