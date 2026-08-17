@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-17 11:55 UTC",
+  "updated": "2026-08-17 13:56 UTC",
   "source": "Official LittleLeague.org schedules + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -391,7 +391,7 @@
       "date": "2026-08-19",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "Phenix City Youth Baseball LL (Southeast) vs Soundview LL (Northwest)",
+      "matchup": "Soundview LL (Northwest) vs Phenix City Youth Baseball LL (Southeast)",
       "tv": "ESPN",
       "status": ""
     },
@@ -407,7 +407,7 @@
       "date": "2026-08-19",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "Bayonne Central LL (Metro) vs Bridgewater Joe Lazaro LL (New England)",
+      "matchup": "Bridgewater Joe Lazaro LL (New England) vs Bayonne Central LL (Metro)",
       "tv": "ESPN",
       "status": ""
     },
@@ -431,7 +431,7 @@
       "date": "2026-08-20",
       "time": "4:00 PM",
       "region": "World Series",
-      "matchup": "Pariba LL (Curaçao) vs Joto LL (Japan)",
+      "matchup": "Joto LL (Japan) vs Pariba LL (Curaçao)",
       "tv": "ESPN",
       "status": ""
     },
@@ -447,7 +447,7 @@
       "date": "2026-08-21",
       "time": "1:00 PM",
       "region": "World Series",
-      "matchup": "David Doleguita LL (Panama) vs W1",
+      "matchup": "W1 vs David Doleguita LL (Panama)",
       "tv": "ESPN",
       "status": ""
     },
@@ -455,7 +455,7 @@
       "date": "2026-08-21",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "Boerne LL (Southwest) vs W2",
+      "matchup": "W2 vs Boerne LL (Southwest)",
       "tv": "ESPN",
       "status": ""
     },
