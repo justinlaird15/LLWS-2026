@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-19 22:54 UTC",
+  "updated": "2026-08-19 23:46 UTC",
   "source": "Official LittleLeague.org regional and World Series schedules + GameChanger regional live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -399,9 +399,9 @@
       "date": "2026-08-19",
       "time": "5:00 PM",
       "region": "World Series",
-      "matchup": "Little Mountain LL (Canada) vs West Seoul (B) LL (Asia-Pacific)",
+      "matchup": "Little Mountain LL (Canada) 0 — West Seoul (B) LL (Asia-Pacific) 7",
       "tv": "ESPN",
-      "status": ""
+      "status": "LIVE"
     },
     {
       "date": "2026-08-19",
@@ -463,7 +463,7 @@
       "date": "2026-08-21",
       "time": "5:00 PM",
       "region": "World Series",
-      "matchup": "South Czech Republic LL (Europe-Africa) vs W3",
+      "matchup": "South Czech Republic LL (Europe-Africa) vs West Seoul (B) LL (Asia-Pacific)",
       "tv": "ESPN",
       "status": ""
     },
@@ -479,7 +479,7 @@
       "date": "2026-08-22",
       "time": "1:00 PM",
       "region": "World Series",
-      "matchup": "L3 vs L5",
+      "matchup": "Little Mountain LL (Canada) vs L3",
       "tv": "ESPN",
       "status": ""
     },
