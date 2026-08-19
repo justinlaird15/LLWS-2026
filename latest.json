@@ -1,6 +1,6 @@
 {
-  "updated": "2026-08-19 21:59 UTC",
-  "source": "Official LittleLeague.org schedules + GameChanger live scoring",
+  "updated": "2026-08-19 22:11 UTC",
+  "source": "Official LittleLeague.org regional and World Series schedules + GameChanger regional live scoring",
   "scraped_games": 117,
   "matched_games": 76,
   "world_series_participants": {
@@ -383,17 +383,17 @@
       "date": "2026-08-19",
       "time": "1:00 PM",
       "region": "World Series",
-      "matchup": "Ministerio Sobre Las Alas Del Aguila LL (Latin America) vs Los Nacionales LL (Caribbean)",
+      "matchup": "Ministerio Sobre Las Alas Del Aguila LL (Latin America) 2 — Los Nacionales LL (Caribbean) 1",
       "tv": "ESPN",
-      "status": ""
+      "status": "FINAL"
     },
     {
       "date": "2026-08-19",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "Soundview LL (Northwest) vs Phenix City Youth Baseball LL (Southeast)",
+      "matchup": "Soundview LL (Northwest) 2 — Phenix City Youth Baseball LL (Southeast) 0",
       "tv": "ESPN",
-      "status": ""
+      "status": "FINAL"
     },
     {
       "date": "2026-08-19",
