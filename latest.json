@@ -1,8 +1,8 @@
 {
-  "updated": "2026-08-20 21:00 UTC",
-  "source": "Official LittleLeague.org regional and World Series schedules + GameChanger regional live scoring",
-  "scraped_games": 115,
-  "matched_games": 73,
+  "updated": "2026-08-20 21:44 UTC",
+  "source": "Official LittleLeague.org schedules + official World Series weather adjustment + GameChanger live scoring",
+  "scraped_games": 117,
+  "matched_games": 76,
   "world_series_participants": {
     "Great Lakes": "West Side LL",
     "Metro": "Bayonne Central LL",
@@ -385,7 +385,8 @@
       "region": "World Series",
       "matchup": "Ministerio Sobre Las Alas Del Aguila LL (Latin America) 2 — Los Nacionales LL (Caribbean) 1",
       "tv": "ESPN",
-      "status": "FINAL"
+      "status": "FINAL",
+      "game_number": 1
     },
     {
       "date": "2026-08-19",
@@ -393,7 +394,8 @@
       "region": "World Series",
       "matchup": "Soundview LL (Northwest) 2 — Phenix City Youth Baseball LL (Southeast) 0",
       "tv": "ESPN",
-      "status": "FINAL"
+      "status": "FINAL",
+      "game_number": 2
     },
     {
       "date": "2026-08-19",
@@ -401,7 +403,8 @@
       "region": "World Series",
       "matchup": "Little Mountain LL (Canada) 0 — West Seoul (B) LL (Asia-Pacific) 7",
       "tv": "ESPN",
-      "status": "FINAL"
+      "status": "FINAL",
+      "game_number": 3
     },
     {
       "date": "2026-08-19",
@@ -409,279 +412,314 @@
       "region": "World Series",
       "matchup": "Bridgewater Joe Lazaro LL (New England) 1 — Bayonne Central LL (Metro) 2",
       "tv": "ESPN",
-      "status": "FINAL"
-    },
-    {
-      "date": "2026-08-20",
-      "time": "12:00 PM",
-      "region": "World Series",
-      "matchup": "Australia Region vs Mexico Region",
-      "tv": "ESPN",
-      "status": ""
-    },
-    {
-      "date": "2026-08-20",
-      "time": "2:00 PM",
-      "region": "World Series",
-      "matchup": "Great Lakes Champion vs Mountain Champion",
-      "tv": "ESPN",
-      "status": ""
-    },
-    {
-      "date": "2026-08-20",
-      "time": "4:00 PM",
-      "region": "World Series",
-      "matchup": "Curaçao Region vs Japan Region",
-      "tv": "ESPN",
-      "status": ""
-    },
-    {
-      "date": "2026-08-20",
-      "time": "6:00 PM",
-      "region": "World Series",
-      "matchup": "West Side LL (Great Lakes) vs Paseo Verde LL (Mountain)",
-      "tv": "ESPN2",
-      "status": ""
+      "status": "FINAL",
+      "game_number": 4
     },
     {
       "date": "2026-08-21",
-      "time": "1:00 PM",
+      "time": "9:00 AM",
       "region": "World Series",
-      "matchup": "Ministerio Sobre Las Alas Del Aguila LL (Latin America) vs W1",
-      "tv": "ESPN",
-      "status": ""
+      "matchup": "Ryde Little League (Australia) vs Municipal De Tijuana LL (Mexico)",
+      "tv": "NO ESPN",
+      "status": "",
+      "game_number": 5
+    },
+    {
+      "date": "2026-08-21",
+      "time": "9:00 AM",
+      "region": "World Series",
+      "matchup": "West Side LL (Great Lakes) vs Paseo Verde LL (Mountain)",
+      "tv": "NO ESPN",
+      "status": "",
+      "game_number": 6
+    },
+    {
+      "date": "2026-08-21",
+      "time": "12:00 PM",
+      "region": "World Series",
+      "matchup": "Joto LL (Japan) vs Pariba LL (Curaçao)",
+      "tv": "TBD",
+      "status": "",
+      "game_number": 7
+    },
+    {
+      "date": "2026-08-21",
+      "time": "12:00 PM",
+      "region": "World Series",
+      "matchup": "Sweetwater Valley LL (West) vs Davenport Northwest LL (Midwest)",
+      "tv": "TBD",
+      "status": "",
+      "game_number": 8
     },
     {
       "date": "2026-08-21",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "Soundview LL (Northwest) vs W2",
-      "tv": "ESPN",
-      "status": ""
+      "matchup": "Ministerio Sobre Las Alas Del Aguila LL (Latin America) vs David Doleguita LL (Panama)",
+      "tv": "TBD",
+      "status": "",
+      "game_number": 9
     },
     {
       "date": "2026-08-21",
-      "time": "5:00 PM",
+      "time": "3:00 PM",
+      "region": "World Series",
+      "matchup": "Soundview LL (Northwest) vs Boerne LL (Southwest)",
+      "tv": "TBD",
+      "status": "",
+      "game_number": 10
+    },
+    {
+      "date": "2026-08-21",
+      "time": "6:00 PM",
       "region": "World Series",
       "matchup": "South Czech Republic LL (Europe-Africa) vs West Seoul (B) LL (Asia-Pacific)",
-      "tv": "ESPN",
-      "status": ""
+      "tv": "TBD",
+      "status": "",
+      "game_number": 11
     },
     {
       "date": "2026-08-21",
       "time": "7:00 PM",
       "region": "World Series",
       "matchup": "East Side LL (Mid-Atlantic) vs Bayonne Central LL (Metro)",
-      "tv": "ESPN",
-      "status": ""
+      "tv": "TBD",
+      "status": "",
+      "game_number": 12
     },
     {
       "date": "2026-08-22",
       "time": "1:00 PM",
       "region": "World Series",
-      "matchup": "Little Mountain LL (Canada) vs L3",
+      "matchup": "Little Mountain LL (Canada) vs L5",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 13
     },
     {
       "date": "2026-08-22",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "Bridgewater Joe Lazaro LL (New England) vs L4",
+      "matchup": "Bridgewater Joe Lazaro LL (New England) vs L6",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 14
     },
     {
       "date": "2026-08-22",
       "time": "5:00 PM",
       "region": "World Series",
-      "matchup": "Los Nacionales LL (Caribbean) vs L1",
+      "matchup": "Los Nacionales LL (Caribbean) vs L7",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 15
     },
     {
       "date": "2026-08-22",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "Phenix City Youth Baseball LL (Southeast) vs L2",
+      "matchup": "Phenix City Youth Baseball LL (Southeast) vs L8",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 16
     },
     {
       "date": "2026-08-23",
       "time": "9:00 AM",
       "region": "World Series",
-      "matchup": "W6 vs W10",
+      "matchup": "TBA vs W6",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 17
     },
     {
       "date": "2026-08-23",
       "time": "11:00 AM",
       "region": "World Series",
-      "matchup": "W5 vs W9",
+      "matchup": "TBA vs W5",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 18
     },
     {
       "date": "2026-08-23",
       "time": "1:00 PM",
       "region": "World Series",
-      "matchup": "W8 vs W12",
+      "matchup": "TBA vs W8",
       "tv": "ABC",
-      "status": ""
+      "status": "",
+      "game_number": 19
     },
     {
       "date": "2026-08-23",
       "time": "2:00 PM",
       "region": "World Series",
-      "matchup": "W7 vs W11",
+      "matchup": "TBA vs W7",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 20
     },
     {
       "date": "2026-08-24",
       "time": "1:00 PM",
       "region": "World Series",
-      "matchup": "L9 vs W13",
+      "matchup": "TBA vs L9",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 21
     },
     {
       "date": "2026-08-24",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "L10 vs W14",
+      "matchup": "TBA vs L10",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 22
     },
     {
       "date": "2026-08-24",
       "time": "5:00 PM",
       "region": "World Series",
-      "matchup": "L11 vs W15",
+      "matchup": "TBA vs L11",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 23
     },
     {
       "date": "2026-08-24",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "L12 vs W16",
+      "matchup": "TBA vs L12",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 24
     },
     {
       "date": "2026-08-25",
       "time": "1:00 PM",
       "region": "World Series",
-      "matchup": "L18 vs W23",
+      "matchup": "TBA vs L18",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 25
     },
     {
       "date": "2026-08-25",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "L17 vs W24",
+      "matchup": "TBA vs L17",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 26
     },
     {
       "date": "2026-08-25",
       "time": "5:00 PM",
       "region": "World Series",
-      "matchup": "L20 vs W21",
+      "matchup": "TBA vs L20",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 27
     },
     {
       "date": "2026-08-25",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "L19 vs W22",
+      "matchup": "TBA vs L19",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 28
     },
     {
       "date": "2026-08-26",
       "time": "1:00 PM",
       "region": "World Series",
-      "matchup": "W18 vs W20",
+      "matchup": "TBA vs W18",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 29
     },
     {
       "date": "2026-08-26",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "W17 vs W19",
+      "matchup": "TBA vs W17",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 30
     },
     {
       "date": "2026-08-26",
       "time": "5:00 PM",
       "region": "World Series",
-      "matchup": "W25 vs W27",
+      "matchup": "TBA vs W25",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 31
     },
     {
       "date": "2026-08-26",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "W26 vs W28",
+      "matchup": "TBA vs W26",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 32
     },
     {
       "date": "2026-08-27",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "L29 vs W31",
+      "matchup": "TBA vs L29",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 33
     },
     {
       "date": "2026-08-27",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "L30 vs W32",
+      "matchup": "TBA vs L30",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 34
     },
     {
       "date": "2026-08-29",
       "time": "12:30 PM",
       "region": "World Series",
-      "matchup": "W29 vs W33",
+      "matchup": "TBA vs W29",
       "tv": "ABC",
-      "status": ""
+      "status": "",
+      "game_number": 35
     },
     {
       "date": "2026-08-29",
       "time": "3:30 PM",
       "region": "World Series",
-      "matchup": "W30 vs W34",
+      "matchup": "TBA vs W30",
       "tv": "ABC",
-      "status": ""
+      "status": "",
+      "game_number": 36
     },
     {
       "date": "2026-08-30",
       "time": "10:00 AM",
       "region": "World Series",
-      "matchup": "L35 vs L36",
+      "matchup": "TBA vs L35",
       "tv": "ESPN",
-      "status": ""
+      "status": "",
+      "game_number": 37
     },
     {
       "date": "2026-08-30",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "W35 vs W36",
+      "matchup": "TBA vs W35",
       "tv": "ABC",
-      "status": ""
+      "status": "",
+      "game_number": 38
     }
   ]
 }
