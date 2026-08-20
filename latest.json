@@ -1,8 +1,8 @@
 {
-  "updated": "2026-08-20 11:59 UTC",
+  "updated": "2026-08-20 14:10 UTC",
   "source": "Official LittleLeague.org regional and World Series schedules + GameChanger regional live scoring",
   "scraped_games": 117,
-  "matched_games": 76,
+  "matched_games": 73,
   "world_series_participants": {
     "Great Lakes": "West Side LL",
     "Metro": "Bayonne Central LL",
@@ -415,7 +415,7 @@
       "date": "2026-08-20",
       "time": "12:00 PM",
       "region": "World Series",
-      "matchup": "Ryde Little League (Australia) vs Municipal De Tijuana LL (Mexico)",
+      "matchup": "Australia Region vs Mexico Region",
       "tv": "ESPN",
       "status": ""
     },
@@ -423,7 +423,7 @@
       "date": "2026-08-20",
       "time": "2:00 PM",
       "region": "World Series",
-      "matchup": "West Side LL (Great Lakes) vs Paseo Verde LL (Mountain)",
+      "matchup": "Great Lakes Champion vs Mountain Champion",
       "tv": "ESPN",
       "status": ""
     },
@@ -431,7 +431,7 @@
       "date": "2026-08-20",
       "time": "4:00 PM",
       "region": "World Series",
-      "matchup": "Joto LL (Japan) vs Pariba LL (Curaçao)",
+      "matchup": "Curaçao Region vs Japan Region",
       "tv": "ESPN",
       "status": ""
     },
