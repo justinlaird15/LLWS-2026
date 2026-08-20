@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-20 18:02 UTC",
+  "updated": "2026-08-20 19:46 UTC",
   "source": "Official LittleLeague.org regional and World Series schedules + GameChanger regional live scoring",
-  "scraped_games": 117,
+  "scraped_games": 115,
   "matched_games": 73,
   "world_series_participants": {
     "Great Lakes": "West Side LL",
@@ -439,7 +439,7 @@
       "date": "2026-08-20",
       "time": "6:00 PM",
       "region": "World Series",
-      "matchup": "Sweetwater Valley LL (West) vs Davenport Northwest LL (Midwest)",
+      "matchup": "West Side LL (Great Lakes) vs Paseo Verde LL (Mountain)",
       "tv": "ESPN2",
       "status": ""
     },
