@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-21 18:03 UTC",
+  "updated": "2026-08-21 19:17 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -437,9 +437,9 @@
       "date": "2026-08-21",
       "time": "12:00 PM",
       "region": "World Series",
-      "matchup": "Joto LL (Japan) vs Pariba LL (Curaçao)",
+      "matchup": "Joto LL (Japan) 0 — Pariba LL (Curaçao) 6",
       "tv": "ESPN",
-      "status": "",
+      "status": "FINAL",
       "game_number": 7
     },
     {
@@ -448,7 +448,7 @@
       "region": "World Series",
       "matchup": "Sweetwater Valley LL (West) 0 — Davenport Northwest LL (Midwest) 1",
       "tv": "ESPN",
-      "status": "LIVE",
+      "status": "FINAL",
       "game_number": 8
     },
     {
@@ -509,7 +509,7 @@
       "date": "2026-08-22",
       "time": "5:00 PM",
       "region": "World Series",
-      "matchup": "Los Nacionales LL (Caribbean) vs L7",
+      "matchup": "Los Nacionales LL (Caribbean) vs Joto LL (Japan)",
       "tv": "ESPN",
       "status": "",
       "game_number": 15
@@ -554,7 +554,7 @@
       "date": "2026-08-23",
       "time": "2:00 PM",
       "region": "World Series",
-      "matchup": "TBA vs W7",
+      "matchup": "Pariba LL (Curaçao) vs W11",
       "tv": "ESPN",
       "status": "",
       "game_number": 20
