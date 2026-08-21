@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-21 17:05 UTC",
+  "updated": "2026-08-21 18:03 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -446,9 +446,9 @@
       "date": "2026-08-21",
       "time": "12:00 PM",
       "region": "World Series",
-      "matchup": "Sweetwater Valley LL (West) vs Davenport Northwest LL (Midwest)",
+      "matchup": "Sweetwater Valley LL (West) 0 — Davenport Northwest LL (Midwest) 1",
       "tv": "ESPN",
-      "status": "",
+      "status": "LIVE",
       "game_number": 8
     },
     {
@@ -518,7 +518,7 @@
       "date": "2026-08-22",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "Phenix City Youth Baseball LL (Southeast) vs L8",
+      "matchup": "Phenix City Youth Baseball LL (Southeast) vs Sweetwater Valley LL (West)",
       "tv": "ESPN",
       "status": "",
       "game_number": 16
@@ -545,7 +545,7 @@
       "date": "2026-08-23",
       "time": "1:00 PM",
       "region": "World Series",
-      "matchup": "TBA vs W8",
+      "matchup": "Davenport Northwest LL (Midwest) vs W12",
       "tv": "ABC",
       "status": "",
       "game_number": 19
