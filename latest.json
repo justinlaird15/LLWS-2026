@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-21 15:53 UTC",
+  "updated": "2026-08-21 17:05 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -421,7 +421,7 @@
       "region": "World Series",
       "matchup": "Ryde Little League (Australia) 1 — Municipal De Tijuana LL (Mexico) 7",
       "tv": "ESPN",
-      "status": "LIVE",
+      "status": "FINAL",
       "game_number": 5
     },
     {
@@ -430,7 +430,7 @@
       "region": "World Series",
       "matchup": "West Side LL (Great Lakes) 5 — Paseo Verde LL (Mountain) 6",
       "tv": "ESPN",
-      "status": "LIVE",
+      "status": "FINAL",
       "game_number": 6
     },
     {
