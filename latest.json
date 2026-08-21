@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-20 23:54 UTC",
+  "updated": "2026-08-21 03:30 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -447,7 +447,7 @@
       "time": "12:00 PM",
       "region": "World Series",
       "matchup": "Sweetwater Valley LL (West) vs Davenport Northwest LL (Midwest)",
-      "tv": "ESPN2",
+      "tv": "ESPN",
       "status": "",
       "game_number": 8
     },
@@ -456,7 +456,7 @@
       "time": "3:00 PM",
       "region": "World Series",
       "matchup": "Ministerio Sobre Las Alas Del Aguila LL (Latin America) vs David Doleguita LL (Panama)",
-      "tv": "ESPN",
+      "tv": "ESPN2",
       "status": "",
       "game_number": 9
     },
