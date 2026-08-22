@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-22 21:41 UTC",
+  "updated": "2026-08-22 22:01 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -502,7 +502,7 @@
       "region": "World Series",
       "matchup": "Bridgewater Joe Lazaro LL (New England) 0 — West Side LL (Great Lakes) 10",
       "tv": "ESPN",
-      "status": "LIVE",
+      "status": "FINAL",
       "game_number": 14
     },
     {
