@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-22 20:46 UTC",
+  "updated": "2026-08-22 21:41 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -500,9 +500,9 @@
       "date": "2026-08-22",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "Bridgewater Joe Lazaro LL (New England) vs West Side LL (Great Lakes)",
+      "matchup": "Bridgewater Joe Lazaro LL (New England) 0 — West Side LL (Great Lakes) 10",
       "tv": "ESPN",
-      "status": "",
+      "status": "LIVE",
       "game_number": 14
     },
     {
@@ -572,7 +572,7 @@
       "date": "2026-08-24",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "Boerne LL (Southwest) vs W14",
+      "matchup": "Boerne LL (Southwest) vs West Side LL (Great Lakes)",
       "tv": "ESPN",
       "status": "",
       "game_number": 22
