@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-21 23:50 UTC",
+  "updated": "2026-08-22 03:06 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -473,18 +473,18 @@
       "date": "2026-08-21",
       "time": "6:00 PM",
       "region": "World Series",
-      "matchup": "West Seoul (B) LL (Asia-Pacific) vs South Czech Republic LL (Europe-Africa)",
+      "matchup": "West Seoul (B) LL (Asia-Pacific) 5 — South Czech Republic LL (Europe-Africa) 0",
       "tv": "ESPN",
-      "status": "",
+      "status": "FINAL",
       "game_number": 11
     },
     {
       "date": "2026-08-21",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "East Side LL (Mid-Atlantic) vs Bayonne Central LL (Metro)",
+      "matchup": "East Side LL (Mid-Atlantic) 1 — Bayonne Central LL (Metro) 3",
       "tv": "ESPN",
-      "status": "",
+      "status": "FINAL",
       "game_number": 12
     },
     {
@@ -545,7 +545,7 @@
       "date": "2026-08-23",
       "time": "1:00 PM",
       "region": "World Series",
-      "matchup": "Davenport Northwest LL (Midwest) vs W12",
+      "matchup": "Bayonne Central LL (Metro) vs Davenport Northwest LL (Midwest)",
       "tv": "ABC",
       "status": "",
       "game_number": 19
@@ -554,7 +554,7 @@
       "date": "2026-08-23",
       "time": "2:00 PM",
       "region": "World Series",
-      "matchup": "Pariba LL (Curaçao) vs W11",
+      "matchup": "West Seoul (B) LL (Asia-Pacific) vs Pariba LL (Curaçao)",
       "tv": "ESPN",
       "status": "",
       "game_number": 20
@@ -581,7 +581,7 @@
       "date": "2026-08-24",
       "time": "5:00 PM",
       "region": "World Series",
-      "matchup": "TBA vs L11",
+      "matchup": "South Czech Republic LL (Europe-Africa) vs W15",
       "tv": "ESPN",
       "status": "",
       "game_number": 23
@@ -590,7 +590,7 @@
       "date": "2026-08-24",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "TBA vs L12",
+      "matchup": "TBA vs W16",
       "tv": "ESPN",
       "status": "",
       "game_number": 24
@@ -617,7 +617,7 @@
       "date": "2026-08-25",
       "time": "5:00 PM",
       "region": "World Series",
-      "matchup": "TBA vs L20",
+      "matchup": "TBA vs W21",
       "tv": "ESPN",
       "status": "",
       "game_number": 27
@@ -626,7 +626,7 @@
       "date": "2026-08-25",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "TBA vs L19",
+      "matchup": "TBA vs W22",
       "tv": "ESPN",
       "status": "",
       "game_number": 28
@@ -653,7 +653,7 @@
       "date": "2026-08-26",
       "time": "5:00 PM",
       "region": "World Series",
-      "matchup": "TBA vs W25",
+      "matchup": "TBA vs W27",
       "tv": "ESPN",
       "status": "",
       "game_number": 31
@@ -662,7 +662,7 @@
       "date": "2026-08-26",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "TBA vs W26",
+      "matchup": "TBA vs W28",
       "tv": "ESPN",
       "status": "",
       "game_number": 32
