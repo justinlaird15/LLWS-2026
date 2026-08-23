@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-23 14:47 UTC",
+  "updated": "2026-08-23 15:43 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -527,9 +527,9 @@
       "date": "2026-08-23",
       "time": "9:00 AM",
       "region": "World Series",
-      "matchup": "Paseo Verde LL (Mountain) vs Soundview LL (Northwest)",
+      "matchup": "Paseo Verde LL (Mountain) 5 — Soundview LL (Northwest) 0",
       "tv": "ESPN",
-      "status": "",
+      "status": "LIVE",
       "game_number": 17
     },
     {
@@ -608,7 +608,7 @@
       "date": "2026-08-25",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "TBA vs L17",
+      "matchup": "Soundview LL (Northwest) vs W24",
       "tv": "ESPN",
       "status": "",
       "game_number": 26
@@ -644,7 +644,7 @@
       "date": "2026-08-26",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "TBA vs W17",
+      "matchup": "Paseo Verde LL (Mountain) vs W19",
       "tv": "ESPN",
       "status": "",
       "game_number": 30
