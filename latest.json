@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-23 19:46 UTC",
+  "updated": "2026-08-23 20:01 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -547,7 +547,7 @@
       "region": "World Series",
       "matchup": "Bayonne Central LL (Metro) 0 — Davenport Northwest LL (Midwest) 6",
       "tv": "ABC",
-      "status": "LIVE",
+      "status": "FINAL",
       "game_number": 19
     },
     {
@@ -644,7 +644,7 @@
       "date": "2026-08-26",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "Paseo Verde LL (Mountain) vs W19",
+      "matchup": "Paseo Verde LL (Mountain) vs Davenport Northwest LL (Midwest)",
       "tv": "ESPN",
       "status": "",
       "game_number": 30
