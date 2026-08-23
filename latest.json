@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-23 00:01 UTC",
+  "updated": "2026-08-23 03:31 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -518,9 +518,9 @@
       "date": "2026-08-22",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "Phenix City Youth Baseball LL (Southeast) vs Sweetwater Valley LL (West)",
+      "matchup": "Phenix City Youth Baseball LL (Southeast) 12 — Sweetwater Valley LL (West) 2",
       "tv": "ESPN",
-      "status": "",
+      "status": "FINAL",
       "game_number": 16
     },
     {
@@ -590,7 +590,7 @@
       "date": "2026-08-24",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "TBA vs W16",
+      "matchup": "Phenix City Youth Baseball LL (Southeast) vs East Side LL (Mid-Atlantic)",
       "tv": "ESPN",
       "status": "",
       "game_number": 24
