@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-23 03:31 UTC",
+  "updated": "2026-08-23 05:05 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -581,7 +581,7 @@
       "date": "2026-08-24",
       "time": "5:00 PM",
       "region": "World Series",
-      "matchup": "South Czech Republic LL (Europe-Africa) vs Joto LL (Japan)",
+      "matchup": "Joto LL (Japan) vs South Czech Republic LL (Europe-Africa)",
       "tv": "ESPN",
       "status": "",
       "game_number": 23
