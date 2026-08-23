@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-23 15:43 UTC",
+  "updated": "2026-08-23 16:53 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -529,7 +529,7 @@
       "region": "World Series",
       "matchup": "Paseo Verde LL (Mountain) 5 — Soundview LL (Northwest) 0",
       "tv": "ESPN",
-      "status": "LIVE",
+      "status": "FINAL",
       "game_number": 17
     },
     {
