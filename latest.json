@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-23 17:41 UTC",
+  "updated": "2026-08-23 18:01 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -538,7 +538,7 @@
       "region": "World Series",
       "matchup": "Municipal De Tijuana LL (Mexico) 4 — Ministerio Sobre Las Alas Del Aguila LL (Latin America) 8",
       "tv": "ESPN",
-      "status": "LIVE",
+      "status": "FINAL",
       "game_number": 18
     },
     {
