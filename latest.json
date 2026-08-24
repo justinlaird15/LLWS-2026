@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-24 19:19 UTC",
+  "updated": "2026-08-24 20:59 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -563,9 +563,9 @@
       "date": "2026-08-24",
       "time": "1:00 PM",
       "region": "World Series",
-      "matchup": "David Doleguita LL (Panama) vs Little Mountain LL (Canada)",
+      "matchup": "David Doleguita LL (Panama) 2 — Little Mountain LL (Canada) 3",
       "tv": "ESPN",
-      "status": "",
+      "status": "FINAL",
       "game_number": 21
     },
     {
@@ -617,7 +617,7 @@
       "date": "2026-08-25",
       "time": "5:00 PM",
       "region": "World Series",
-      "matchup": "TBA vs W21",
+      "matchup": "Little Mountain LL (Canada) vs West Seoul (B) LL (Asia-Pacific)",
       "tv": "ESPN",
       "status": "",
       "game_number": 27
