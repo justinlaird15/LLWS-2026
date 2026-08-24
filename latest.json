@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-24 20:59 UTC",
+  "updated": "2026-08-24 21:58 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -572,9 +572,9 @@
       "date": "2026-08-24",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "Boerne LL (Southwest) vs West Side LL (Great Lakes)",
+      "matchup": "Boerne LL (Southwest) 1 — West Side LL (Great Lakes) 6",
       "tv": "ESPN",
-      "status": "",
+      "status": "LIVE",
       "game_number": 22
     },
     {
@@ -626,7 +626,7 @@
       "date": "2026-08-25",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "TBA vs W22",
+      "matchup": "West Side LL (Great Lakes) vs Bayonne Central LL (Metro)",
       "tv": "ESPN",
       "status": "",
       "game_number": 28
