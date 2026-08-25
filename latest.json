@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-25 21:02 UTC",
+  "updated": "2026-08-25 21:57 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -608,9 +608,9 @@
       "date": "2026-08-25",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "Soundview LL (Northwest) vs Phenix City Youth Baseball LL (Southeast)",
+      "matchup": "Soundview LL (Northwest) 2 — Phenix City Youth Baseball LL (Southeast) 4",
       "tv": "ESPN",
-      "status": "",
+      "status": "LIVE",
       "game_number": 26
     },
     {
