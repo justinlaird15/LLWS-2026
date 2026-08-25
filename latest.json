@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-24 23:46 UTC",
+  "updated": "2026-08-25 03:14 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -583,16 +583,16 @@
       "region": "World Series",
       "matchup": "Joto LL (Japan) 3 — South Czech Republic LL (Europe-Africa) 2",
       "tv": "ESPN",
-      "status": "LIVE",
+      "status": "FINAL",
       "game_number": 23
     },
     {
       "date": "2026-08-24",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "Phenix City Youth Baseball LL (Southeast) vs East Side LL (Mid-Atlantic)",
+      "matchup": "Phenix City Youth Baseball LL (Southeast) 6 — East Side LL (Mid-Atlantic) 5",
       "tv": "ESPN",
-      "status": "",
+      "status": "FINAL",
       "game_number": 24
     },
     {
@@ -608,7 +608,7 @@
       "date": "2026-08-25",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "Soundview LL (Northwest) vs W24",
+      "matchup": "Soundview LL (Northwest) vs Phenix City Youth Baseball LL (Southeast)",
       "tv": "ESPN",
       "status": "",
       "game_number": 26
