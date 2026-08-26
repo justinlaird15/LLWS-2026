@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-25 23:52 UTC",
+  "updated": "2026-08-26 03:34 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -619,16 +619,16 @@
       "region": "World Series",
       "matchup": "Little Mountain LL (Canada) 5 — West Seoul (B) LL (Asia-Pacific) 1",
       "tv": "ESPN",
-      "status": "LIVE",
+      "status": "FINAL",
       "game_number": 27
     },
     {
       "date": "2026-08-25",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "West Side LL (Great Lakes) vs Bayonne Central LL (Metro)",
+      "matchup": "West Side LL (Great Lakes) 5 — Bayonne Central LL (Metro) 2",
       "tv": "ESPN",
-      "status": "",
+      "status": "FINAL",
       "game_number": 28
     },
     {
@@ -653,7 +653,7 @@
       "date": "2026-08-26",
       "time": "5:00 PM",
       "region": "World Series",
-      "matchup": "TBA vs W27",
+      "matchup": "Little Mountain LL (Canada) vs Joto LL (Japan)",
       "tv": "ESPN",
       "status": "",
       "game_number": 31
@@ -662,7 +662,7 @@
       "date": "2026-08-26",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "TBA vs W28",
+      "matchup": "West Side LL (Great Lakes) vs Phenix City Youth Baseball LL (Southeast)",
       "tv": "ESPN",
       "status": "",
       "game_number": 32
