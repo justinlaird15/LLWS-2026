@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-26 14:08 UTC",
+  "updated": "2026-08-26 16:57 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -669,16 +669,16 @@
     },
     {
       "date": "2026-08-27",
-      "time": "3:00 PM",
+      "time": "9:00 AM",
       "region": "World Series",
       "matchup": "TBA vs L29",
-      "tv": "ESPN",
+      "tv": "ESPN2",
       "status": "",
       "game_number": 33
     },
     {
       "date": "2026-08-27",
-      "time": "7:00 PM",
+      "time": "9:00 AM",
       "region": "World Series",
       "matchup": "TBA vs L30",
       "tv": "ESPN",
