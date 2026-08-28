@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-26 16:57 UTC",
+  "updated": "2026-08-28 01:30 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -635,61 +635,61 @@
       "date": "2026-08-26",
       "time": "1:00 PM",
       "region": "World Series",
-      "matchup": "Ministerio Sobre Las Alas Del Aguila LL (Latin America) vs Pariba LL (Curaçao)",
+      "matchup": "Ministerio Sobre Las Alas Del Aguila LL (Latin America) 3 — Pariba LL (Curaçao) 12",
       "tv": "ESPN",
-      "status": "",
+      "status": "FINAL",
       "game_number": 29
     },
     {
       "date": "2026-08-26",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "Paseo Verde LL (Mountain) vs Davenport Northwest LL (Midwest)",
+      "matchup": "Paseo Verde LL (Mountain) 14 — Davenport Northwest LL (Midwest) 6",
       "tv": "ESPN",
-      "status": "",
+      "status": "FINAL",
       "game_number": 30
     },
     {
       "date": "2026-08-26",
       "time": "5:00 PM",
       "region": "World Series",
-      "matchup": "Little Mountain LL (Canada) vs Joto LL (Japan)",
+      "matchup": "Little Mountain LL (Canada) 3 — Joto LL (Japan) 7",
       "tv": "ESPN",
-      "status": "",
+      "status": "FINAL",
       "game_number": 31
     },
     {
       "date": "2026-08-26",
       "time": "7:00 PM",
       "region": "World Series",
-      "matchup": "West Side LL (Great Lakes) vs Phenix City Youth Baseball LL (Southeast)",
+      "matchup": "West Side LL (Great Lakes) 11 — Phenix City Youth Baseball LL (Southeast) 2",
       "tv": "ESPN",
-      "status": "",
+      "status": "FINAL",
       "game_number": 32
     },
     {
       "date": "2026-08-27",
       "time": "9:00 AM",
       "region": "World Series",
-      "matchup": "TBA vs L29",
+      "matchup": "Ministerio Sobre Las Alas Del Aguila LL (Latin America) 1 — Joto LL (Japan) 4",
       "tv": "ESPN2",
-      "status": "",
+      "status": "FINAL",
       "game_number": 33
     },
     {
       "date": "2026-08-27",
       "time": "9:00 AM",
       "region": "World Series",
-      "matchup": "TBA vs L30",
+      "matchup": "Davenport Northwest LL (Midwest) 1 — West Side LL (Great Lakes) 7",
       "tv": "ESPN",
-      "status": "",
+      "status": "FINAL",
       "game_number": 34
     },
     {
       "date": "2026-08-29",
       "time": "12:30 PM",
       "region": "World Series",
-      "matchup": "TBA vs W29",
+      "matchup": "Pariba LL (Curaçao) vs Joto LL (Japan)",
       "tv": "ABC",
       "status": "",
       "game_number": 35
@@ -698,7 +698,7 @@
       "date": "2026-08-29",
       "time": "3:30 PM",
       "region": "World Series",
-      "matchup": "TBA vs W30",
+      "matchup": "Paseo Verde LL (Mountain) vs West Side LL (Great Lakes)",
       "tv": "ABC",
       "status": "",
       "game_number": 36
