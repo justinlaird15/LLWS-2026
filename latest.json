@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-29 21:47 UTC",
+  "updated": "2026-08-29 21:53 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -698,16 +698,16 @@
       "date": "2026-08-29",
       "time": "3:30 PM",
       "region": "World Series",
-      "matchup": "Paseo Verde LL (Mountain) vs West Side LL (Great Lakes)",
+      "matchup": "Paseo Verde LL (Mountain) 12 — West Side LL (Great Lakes) 2",
       "tv": "ABC",
-      "status": "",
+      "status": "LIVE",
       "game_number": 36
     },
     {
       "date": "2026-08-30",
       "time": "10:00 AM",
       "region": "World Series",
-      "matchup": "Joto LL (Japan) vs L36",
+      "matchup": "Joto LL (Japan) vs West Side LL (Great Lakes)",
       "tv": "ESPN",
       "status": "",
       "game_number": 37
@@ -716,7 +716,7 @@
       "date": "2026-08-30",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "Pariba LL (Curaçao) vs W36",
+      "matchup": "Pariba LL (Curaçao) vs Paseo Verde LL (Mountain)",
       "tv": "ABC",
       "status": "",
       "game_number": 38
