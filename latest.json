@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-29 18:32 UTC",
+  "updated": "2026-08-29 18:37 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -689,9 +689,9 @@
       "date": "2026-08-29",
       "time": "12:30 PM",
       "region": "World Series",
-      "matchup": "Pariba LL (Curaçao) vs Joto LL (Japan)",
+      "matchup": "Pariba LL (Curaçao) 4 — Joto LL (Japan) 0",
       "tv": "ABC",
-      "status": "",
+      "status": "LIVE",
       "game_number": 35
     },
     {
@@ -707,7 +707,7 @@
       "date": "2026-08-30",
       "time": "10:00 AM",
       "region": "World Series",
-      "matchup": "TBA vs L35",
+      "matchup": "Joto LL (Japan) vs L36",
       "tv": "ESPN",
       "status": "",
       "game_number": 37
@@ -716,7 +716,7 @@
       "date": "2026-08-30",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "TBA vs W35",
+      "matchup": "Pariba LL (Curaçao) vs W36",
       "tv": "ABC",
       "status": "",
       "game_number": 38
