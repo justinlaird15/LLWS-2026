@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-30 15:50 UTC",
+  "updated": "2026-08-30 15:56 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -707,9 +707,9 @@
       "date": "2026-08-30",
       "time": "10:00 AM",
       "region": "World Series",
-      "matchup": "Joto LL (Japan) vs West Side LL (Great Lakes)",
+      "matchup": "Joto LL (Japan) 3 — West Side LL (Great Lakes) 2",
       "tv": "ESPN",
-      "status": "",
+      "status": "LIVE",
       "game_number": 37
     },
     {
