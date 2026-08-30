@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-30 20:52 UTC",
+  "updated": "2026-08-30 20:58 UTC",
   "source": "Official LittleLeague.org schedules + dynamic official TV listings + official weather adjustments + GameChanger live scoring",
   "scraped_games": 117,
   "matched_games": 76,
@@ -716,7 +716,7 @@
       "date": "2026-08-30",
       "time": "3:00 PM",
       "region": "World Series",
-      "matchup": "Pariba LL (Curaçao) vs Paseo Verde LL (Mountain)",
+      "matchup": "Paseo Verde LL (Mountain) vs Pariba LL (Curaçao)",
       "tv": "ABC",
       "status": "",
       "game_number": 38
